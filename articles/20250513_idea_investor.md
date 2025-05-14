@@ -1,6 +1,6 @@
 ---
 title: "アラサー個人投資家の未来戦略：お金と時間の使い方"
-emoji: "👏"
+emoji: "⏰"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ["時間", "お金", "投資", "アラサー"]
 published: true
