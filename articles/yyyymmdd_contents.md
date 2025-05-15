@@ -1,6 +1,6 @@
 ---
-title: "【内部管理用】目次"
-emoji: "🐕"
+title: "【内部用】目次"
+emoji: "📋"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: []
 published: false  #変えない
