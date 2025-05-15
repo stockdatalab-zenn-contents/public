@@ -25,6 +25,7 @@ published: false  #変えない
 |      ★      | 気になる業界のニュースを定期的に読む     | XXXXX                                   |XXXXX |
 |      ★      | 扱ってみたいデータを使って分析してみる   | XXXXX                                   |XXXXX |
 |      ★      | 手法をひとつ選んで、手を動かしてみる     | XXXXX                                   |XXXXX |
+|      ★      | EDA                                      | XXXXX                                   |EDAライブラリを大容量データで使う、その他コツ |
 
 
 ## Slug とタイトルの紐づけ
