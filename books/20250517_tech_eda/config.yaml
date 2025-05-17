@@ -1,0 +1,10 @@
+title: "記事の補足：大量カラムでも楽々EDA！sweetvizの欠点をスクレイピングでカバーする方法"
+summary: "この本は「[大量カラムでも楽々EDA！sweetvizの欠点をスクレイピングでカバーする方法](★★★)」の補足資料です。記事に載っているソースコードを実行した時に出力されるhtmlファイル（ソース）をこちらに載せています。"
+topics: []
+published: false
+price: 0 # 有料の場合200〜5000
+# 本に含めるチャプターを順番に並べましょう
+chapters:
+  - 1.ydata-profiling
+  - 2.autoviz
+  - 3.sweetviz
