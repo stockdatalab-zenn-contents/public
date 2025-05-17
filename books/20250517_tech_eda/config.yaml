@@ -5,6 +5,3 @@ published: false
 price: 0 # 有料の場合200〜5000
 # 本に含めるチャプターを順番に並べましょう
 chapters:
-  - 1.ydata-profiling
-  - 2.autoviz
-  - 3.sweetviz
