@@ -18,8 +18,8 @@ published: false  #変えない
 |      04      | 駆け出しデータサイエンティストの未来戦略 | 得意分野の見つけ方とキャリア設計：駆け出しデータサイエンティスト向け           |「お客様」「扱うデータ」「分析手法」の３軸でキャリアを考える |
 |      ★      | 駆け出しデータサイエンティストの未来戦略 | キャリアを考える（深堀版）                                                     |どのスキルを身に着けるか具体的に整理 |
 |      05      | 環境構築                                 | Python環境構築ガイド：venv・Docker・クラウドの選び方と使い分け                 |「ローカル」「コンテナ」「クラウド」の３軸で環境の選び方を整理 |
-|      ★      | 環境構築                                 | XXXXX                                                                          |venv |
-|      ★      | 環境構築                                 | XXXXX                                                                          |docker |
+|      ★      | 環境構築                                 | Python環境構築ガイド：venv環境の構築方法                                       |venv |
+|      ★      | 環境構築                                 | Python環境構築ガイド：Docker環境の構築方法                                     |docker |
 |      06      | スクレイピング                           | XXXXX                                                                          |PDFをスクレイピング |
 |      07      | youtubeから情報収集                      | XXXXX                                                                          |動画をCopilot in edgeで要約する |
 |      08      | twitterから情報収集                      | XXXXX                                                                          |XXXXX |
@@ -40,11 +40,13 @@ published: false  #変えない
 |      03      | アラサー個人投資家の未来戦略             | 自分に合った投資戦略の組み立て方        | 20250514_Wed | 20250515_idea_investor.md  |
 |      04      | 駆け出しデータサイエンティストの未来戦略 | 得意分野の見つけ方とキャリア設計        | 20250515_Thu | 20250516_idea_ds.md  |
 |      05      | 環境構築                                 | 環境構築方法の選び方                    | 20250518_Sun | 20250518_tech_env.md  |
-|      06      | スクレイピング                           | XXXXX                                   | 202505XX_XXX | 202505XX_tech_scrapping.md  |
-|      07      | youtubeから情報収集                      | XXXXX                                   | 202505XX_XXX | 202505XX_tech_youtube.md  |
-|      08      | twitterから情報収集                      | XXXXX                                   | 202505XX_XXX | 202505XX_tech_twitter.md  |
-|      09      | BIツール                                 | XXXXX                                   | 202505XX_XXX | 202505XX_tech_bi.md  |
-|      10      | AutoMLツール                             | XXXXX                                   | 202505XX_XXX | 202505XX_tech_automl.md  |
+|      06      | 環境構築                                 | 環境構築方法（venv）                    | 202505XX_XXX | 20250519_tech_env_venv.md  |
+|      07      | 環境構築                                 | 環境構築方法（docker）                  | 202505XX_XXX | 20250519_tech_env_docker.md  |
+|      08      | スクレイピング                           | XXXXX                                   | 202505XX_XXX | 202505XX_tech_scrapping.md  |
+|      09      | youtubeから情報収集                      | XXXXX                                   | 202505XX_XXX | 202505XX_tech_youtube.md  |
+|      10      | twitterから情報収集                      | XXXXX                                   | 202505XX_XXX | 202505XX_tech_twitter.md  |
+|      11      | BIツール                                 | XXXXX                                   | 202505XX_XXX | 202505XX_tech_bi.md  |
+|      12      | AutoMLツール                             | XXXXX                                   | 202505XX_XXX | 202505XX_tech_automl.md  |
 
 
 ## 進捗
