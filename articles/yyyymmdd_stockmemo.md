@@ -8,6 +8,28 @@ published: false  #変えない
 ## ルーティーン
 - 7:30～7:45 起床・モーサテ視聴
 - 8:20～9:30 NOBU塾視聴・トレード
+:::details 勝てるチャートパターン復習
+![](/images/yyyymmdd_stockmemo/chart1.png =800x)
+![](/images/yyyymmdd_stockmemo/chart2.png =800x)
+![](/images/yyyymmdd_stockmemo/chart3.png =800x)
+![](/images/yyyymmdd_stockmemo/chart4.png =800x)
+![](/images/yyyymmdd_stockmemo/chart5.png =800x)
+![](/images/yyyymmdd_stockmemo/chart6.png =800x)
+![](/images/yyyymmdd_stockmemo/chart7.png =800x)
+![](/images/yyyymmdd_stockmemo/chart8.png =800x)
+![](/images/yyyymmdd_stockmemo/chart9.png =800x)
+![](/images/yyyymmdd_stockmemo/chart10.png =800x)
+![](/images/yyyymmdd_stockmemo/chart11.png =800x)
+![](/images/yyyymmdd_stockmemo/chart12.png =800x)
+![](/images/yyyymmdd_stockmemo/chart13.png =800x)
+![](/images/yyyymmdd_stockmemo/chart14.png =800x)
+![](/images/yyyymmdd_stockmemo/chart15.png =800x)
+![](/images/yyyymmdd_stockmemo/chart16.png =800x)
+![](/images/yyyymmdd_stockmemo/chart17.png =800x)
+![](/images/yyyymmdd_stockmemo/chart18.png =800x)
+:::
+
+
 
 ## ステータス別管理
 ### エントリー済み
