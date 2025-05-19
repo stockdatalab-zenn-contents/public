@@ -8,25 +8,155 @@ published: false  #変えない
 ## ルーティーン
 - 7:30～7:45 起床・モーサテ視聴
 - 8:20～9:30 NOBU塾視聴・トレード
-:::details 勝てるチャートパターン復習
+:::details 勝てるチャートパターン復習１
+上値が重い場合は、下がりやすい。
 ![](/images/yyyymmdd_stockmemo/chart1.png =800x)
+上値が軽い場合は、上がりやすい。
 ![](/images/yyyymmdd_stockmemo/chart2.png =800x)
+大陰線と大陽線がついた後は、その場所を底値にして上がりやすい。
 ![](/images/yyyymmdd_stockmemo/chart3.png =800x)
+上値が重い場合は下がりやすく、上値が軽い場合は上がりやすい。
 ![](/images/yyyymmdd_stockmemo/chart4.png =800x)
+いずれにしてもTFブレイクアウトを待つ。
 ![](/images/yyyymmdd_stockmemo/chart5.png =800x)
+いずれにしてもTFブレイクアウトを待つ。
 ![](/images/yyyymmdd_stockmemo/chart6.png =800x)
+全部戻しの直後がチャンス。
 ![](/images/yyyymmdd_stockmemo/chart7.png =800x)
+ロングなら必ずTFブレイクアウトを待つ。ショートは待たなくて良い。
 ![](/images/yyyymmdd_stockmemo/chart8.png =800x)
+急落時のバウンドを利用する。
 ![](/images/yyyymmdd_stockmemo/chart9.png =800x)
+ロングなら必ずTFブレイクアウトを待つ。ショートは待たなくて良い。
 ![](/images/yyyymmdd_stockmemo/chart10.png =800x)
+上がらない時期が長続きした後は、急上昇しやすい。
 ![](/images/yyyymmdd_stockmemo/chart11.png =800x)
+高値圏での稲穂型は、下がりやすい。
 ![](/images/yyyymmdd_stockmemo/chart12.png =800x)
+上がらない時期が長続きした後は、急上昇しやすい。
 ![](/images/yyyymmdd_stockmemo/chart13.png =800x)
+窓埋め後は下がりやすい。
 ![](/images/yyyymmdd_stockmemo/chart14.png =800x)
+低値圏での稲穂型は、上がりやすい。
 ![](/images/yyyymmdd_stockmemo/chart15.png =800x)
+急降下した時は、ダウラインを貫きやすい。必ずTFブレイクアウトを待つ。
 ![](/images/yyyymmdd_stockmemo/chart16.png =800x)
+38.2%と61.8％で反発しやすい。
 ![](/images/yyyymmdd_stockmemo/chart17.png =800x)
+TFブレイクアウト後のエントリーは勝ちやすい。
 ![](/images/yyyymmdd_stockmemo/chart18.png =800x)
+:::
+
+
+
+:::details 勝てるチャートパターン復習２
+![](/images/yyyymmdd_stockmemo/chart21.png =800x)
+![](/images/yyyymmdd_stockmemo/chart22.png =800x)
+![](/images/yyyymmdd_stockmemo/chart23.png =800x)
+![](/images/yyyymmdd_stockmemo/chart24.png =800x)
+![](/images/yyyymmdd_stockmemo/chart25.png =800x)
+![](/images/yyyymmdd_stockmemo/chart26.png =800x)
+![](/images/yyyymmdd_stockmemo/chart27.png =800x)
+![](/images/yyyymmdd_stockmemo/chart28.png =800x)
+![](/images/yyyymmdd_stockmemo/chart29.png =800x)
+![](/images/yyyymmdd_stockmemo/chart30.png =800x)
+![](/images/yyyymmdd_stockmemo/chart31.png =800x)
+![](/images/yyyymmdd_stockmemo/chart32.png =800x)
+![](/images/yyyymmdd_stockmemo/chart33.png =800x)
+![](/images/yyyymmdd_stockmemo/chart34.png =800x)
+![](/images/yyyymmdd_stockmemo/chart35.png =800x)
+![](/images/yyyymmdd_stockmemo/chart36.png =800x)
+![](/images/yyyymmdd_stockmemo/chart37.png =800x)
+:::
+
+
+
+:::details チェックリスト
+## 000_Basic
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   001  | メンタルの調子が良い日だけトレードする。 |
+
+<br>
+## 100_Strategy-Fundamental
+*Strategy: 銘柄選定・Entry-Exit計画策定の段階
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   101  | **権利付最終日**を確認する。 |
+|   102  | **決算日**を確認する。 |
+|   103  | 直近の**決算状況**を確認する。 |
+|   104  | **市場が注目している指標**が何か日々のニュースなどで把握する。 |
+
+<br>
+## 200_Strategy-Technical
+*Strategy: 銘柄選定・Entry-Exit計画策定の段階
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   201  | **遅めのEntry・早めのExit**を計画する（欲張らない）。 |
+|   202  | **勝ちやすいチャートパターン**になっていることを確認する。 |
+|   203  | １日あたりの取引量が**１M以上**あることを確認する。 |
+|   204  | 自分の**見積の誤差（±10）を**予め想定しておく。 |
+|   205  | **複数の時間軸**でチャートの方向感を確認する。 |
+
+
+<br>
+## 300_Strategy-Long
+*Strategy: 銘柄選定・Entry-Exit計画策定の段階
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   301  | **権利付最終日2～3か月前**の銘柄をロングで狙い、権利付最終日前にExitラインを見直す。 |
+|   302  | **押し目買い**でスイングトレードする。 |
+|   303  | **だまし後の場面である**ことを確認する。 |
+
+<br>
+## 400_Strategy-Short
+*Strategy: 銘柄選定・Entry-Exit計画策定の段階
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   401  | 必ず、**勝ちやすいチャートパターン**になっていることを確認する。 |
+|   402  | ファンダメンタル分析とテクニカル分析の**方向感が合致している**ことを確認する。 |
+
+<br>
+## 500_Entry
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   501  | 必ず、**権利付最終日の直前ではない**ことを確認する。 |
+|   502  | 必ず、**決算日の直前ではない**ことを確認する。 |
+|   503  | 9:00直前の板の厚さを確認する。 |
+|   504  | 方向感の判断に迷ったらトレードしない。 |
+
+<br>
+## 600_Holding
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   601  | Exitラインを**価格のスピード感**に応じて見直す。 |
+
+<br>
+## 700_Exit
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   701  | 配当狙いではないスイングトレードでは、**週を跨がない**。 |
+|   702  | 配当狙いのトレードでは、**権利付最終日前に**Exitラインを見直す。 |
+
+<br>
+## 800_Exited with a Loss
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   801  | 3回連続負けたらその週は**新しくEntryせず**、メンタルを整える。 |
+
+<br>
+## 900_Exited with a Gain
+|   No   |       チェック内容       |
+|  ----  |          ----            |
+|   901  | 自信を持ちすぎないようにする。 |
+|   902  | 次のトレードで**欲張らない**ようにする。 |
+:::
+
+
+:::details チェック
+|    日付    |   01   |   02  |
+|    ----    |  ----  |  ---- |
+|  XXXXXXXX  |   ⬜    |  ✅   |
 :::
 
 
@@ -157,94 +287,5 @@ published: false  #変えない
 |  7733  | オリンパス         | -2050    |     0514 |     0514 |     ロング     |      上昇      | 押し目買い |
 |  6503  | 三菱電機           | +6250    |     0514 |     0515 |     ロング     |      上昇      | 押し目買い |
 
-:::
-
-
-### チェックリスト
-:::details チェックリスト
-## 000_Basic
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   001  | メンタルの調子が良い日だけトレードする。 |
-
-<br>
-## 100_Strategy-Fundamental
-*Strategy: 銘柄選定・Entry-Exit計画策定の段階
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   101  | **権利付最終日**を確認する。 |
-|   102  | **決算日**を確認する。 |
-|   103  | 直近の**決算状況**を確認する。 |
-|   104  | **市場が注目している指標**が何か日々のニュースなどで把握する。 |
-
-<br>
-## 200_Strategy-Technical
-*Strategy: 銘柄選定・Entry-Exit計画策定の段階
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   201  | **遅めのEntry・早めのExit**を計画する（欲張らない）。 |
-|   202  | **勝ちやすいチャートパターン**になっていることを確認する。 |
-|   203  | １日あたりの取引量が**１M以上**あることを確認する。 |
-|   204  | 自分の**見積の誤差（±10）を**予め想定しておく。 |
-|   205  | **複数の時間軸**でチャートの方向感を確認する。 |
-
-
-<br>
-## 300_Strategy-Long
-*Strategy: 銘柄選定・Entry-Exit計画策定の段階
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   301  | **権利付最終日2～3か月前**の銘柄をロングで狙い、権利付最終日前にExitラインを見直す。 |
-|   302  | **押し目買い**でスイングトレードする。 |
-|   303  | **だまし後の場面である**ことを確認する。 |
-
-<br>
-## 400_Strategy-Short
-*Strategy: 銘柄選定・Entry-Exit計画策定の段階
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   401  | 必ず、**勝ちやすいチャートパターン**になっていることを確認する。 |
-|   402  | ファンダメンタル分析とテクニカル分析の**方向感が合致している**ことを確認する。 |
-
-<br>
-## 500_Entry
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   501  | 必ず、**権利付最終日の直前ではない**ことを確認する。 |
-|   502  | 必ず、**決算日の直前ではない**ことを確認する。 |
-|   503  | 9:00直前の板の厚さを確認する。 |
-|   504  | 方向感の判断に迷ったらトレードしない。 |
-
-<br>
-## 600_Holding
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   601  | Exitラインを**価格のスピード感**に応じて見直す。 |
-
-<br>
-## 700_Exit
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   701  | 配当狙いではないスイングトレードでは、**週を跨がない**。 |
-|   702  | 配当狙いのトレードでは、**権利付最終日前に**Exitラインを見直す。 |
-
-<br>
-## 800_Exited with a Loss
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   801  | 3回連続負けたらその週は**新しくEntryせず**、メンタルを整える。 |
-
-<br>
-## 900_Exited with a Gain
-|   No   |       チェック内容       |
-|  ----  |          ----            |
-|   901  | 自信を持ちすぎないようにする。 |
-|   902  | 次のトレードで**欲張らない**ようにする。 |
-:::
-
-:::details チェック
-|    日付    |   01   |   02  |
-|    ----    |  ----  |  ---- |
-|  XXXXXXXX  |   ⬜    |  ✅   |
 :::
 

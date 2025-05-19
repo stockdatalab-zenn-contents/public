@@ -18,8 +18,8 @@ published: false  #変えない
 |      04      | 駆け出しデータサイエンティストの未来戦略 | 得意分野の見つけ方とキャリア設計：駆け出しデータサイエンティスト向け           |「お客様」「扱うデータ」「分析手法」の３軸でキャリアを考える |
 |      ★      | 駆け出しデータサイエンティストの未来戦略 | キャリアを考える（深堀版）                                                     |どのスキルを身に着けるか具体的に整理 |
 |      05      | 環境構築                                 | Python環境構築ガイド：venv・Docker・クラウドの選び方と使い分け                 |「ローカル」「コンテナ」「クラウド」の３軸で環境の選び方を整理 |
-|      06      | 環境構築                                 | Windows11にWSL＋DockerでPython環境を構築する方法：初心者向け                   |Windows11にWSL＋Docker（+VSCode）でPython環境を構築する方法 |
-|      07      | スクレイピング                           | XXXXX                                                                          |PDFをスクレイピング |
+|      06      | 環境構築                                 | 図解：Windows11にWSL＋DockerでPython環境を構築する方法                         |Windows11にWSL＋Docker（+VSCode）でPython環境を構築する方法 |
+|      ★★    | スクレイピング                           | XXXXX                                                                          |PDFをスクレイピング |
 |      ★      | youtubeから情報収集                      | XXXXX                                                                          |動画をCopilot in edgeで要約する |
 |      ★      | twitterから情報収集                      | XXXXX                                                                          |XXXXX |
 |      ★      | BIツール                                 | XXXXX                                                                          |XXXXX |
@@ -40,12 +40,14 @@ published: false  #変えない
 |      03      | アラサー個人投資家の未来戦略             | 自分に合った投資戦略の組み立て方        | 20250514_Wed | 20250515_idea_investor.md  |
 |      04      | 駆け出しデータサイエンティストの未来戦略 | 得意分野の見つけ方とキャリア設計        | 20250515_Thu | 20250516_idea_ds.md  |
 |      05      | 環境構築                                 | 環境構築方法の選び方                    | 20250518_Sun | 20250518_tech_env.md  |
-|      06      | 環境構築                                 | 環境構築方法（docker）                  | 202505XX_XXX | 20250519_tech_env_docker.md  |
-|      07      | スクレイピング                           | XXXXX                                   | 202505XX_XXX | 202505XX_tech_scrapping.md  |
+|      06      | 環境構築                                 | 環境構築方法（docker）                  | 20250519_Mon | 20250519_tech_env_docker.md  |
+|      ★★    | スクレイピング                           | XXXXX                                   | 202505XX_XXX | 202505XX_tech_scrapping.md  |
 |      ★      | youtubeから情報収集                      | XXXXX                                   | 202505XX_XXX | 202505XX_tech_youtube.md  |
 |      ★      | twitterから情報収集                      | XXXXX                                   | 202505XX_XXX | 202505XX_tech_twitter.md  |
 |      ★      | BIツール                                 | XXXXX                                   | 202505XX_XXX | 202505XX_tech_bi.md  |
 |      ★      | AutoMLツール                             | XXXXX                                   | 202505XX_XXX | 202505XX_tech_automl.md  |
+|      ★      | DockerCheatSheet                         | XXXXX                                   | 202505XX_XXX | 202505XX_tech_docker_cheat.md  |
+|      ★      | PythonCheatSheet                         | XXXXX                                   | 202505XX_XXX | 202505XX_tech_python_cheat.md  |
 
 
 ## 進捗
@@ -63,10 +65,10 @@ published: false  #変えない
 |      03      |公開済み |    完　    |    完　    |    完　    |    完　    |    完　    |    ー　    |
 |      04      |公開済み |    完　    |    完　    |    完　    |    完　    |    完　    |    ー　    |
 |      05      |公開済み |    完　    |    完　    |    完　    |    完　    |    ー　    |    ー　    |
-|      06      |未作成   |    　　    |    　　    |    　　    |    　　    |    　　    |    ー　    |
+|      06      |公開済み |    完　    |    完　    |    完　    |    完　    |    ー　    |    ー　    |
 |      07      |未作成   |    　　    |    　　    |    　　    |    　　    |    　　    |    ー　    |
 |      08      |未作成   |    　　    |    　　    |    　　    |    　　    |    　　    |    ー　    |
-
+|      08      |未作成   |    　　    |    　　    |    　　    |    　　    |    　　    |    ー　    |
 
 
 
@@ -78,6 +80,47 @@ published: false  #変えない
 
 
 ## さいごに
+:::
+
+
+:::details 分析のプロセス（EDA関連）
+※関連記事：
+・20250516_idea_ds.md
+　駆け出しデータサイエンティストの未来戦略：得意分野をどう決める？キャリア設計入門
+・書籍「[Python実践 データ分析入門 キホンの5つの型](https://amzn.asia/d/1MuxA8C)」
+![](/images/util/dummy_white.png =150x)
+- データ理解
+  - 1-1. ライブラリの読み込み
+  - 1-2. 初期定義
+  - 1-3. データの読み込み
+  
+  - 2-1. データの状態確認
+  ・必要な情報が網羅されていることを確認
+  ・各カラムの桁数を確認
+  ・各カラムの種別（数値か分類値か）を確認
+  ・各カラムの分布を確認
+  ・代表的な値を確認
+  &emsp;- データの行数
+  &emsp;- 平均値
+  &emsp;- 中央値
+  &emsp;- 最大値
+  &emsp;- 最小値
+  &emsp;- 標準偏差
+  
+  - 2-2. データの加工と確認
+  ・明らかに不要なデータの除去
+  ・欠損値に対する処理
+  ・表記揺れに対する処理
+  ・データを機械学習の粒度に揃える
+  
+  ★切り口（カラムのグループ化など）と指標の繋がりを意識する
+  ※運用時のデータ更新は、「収集→加工→更新」の３ステップ
+
+- 分析の質を上げる
+  - 「言葉の詳細度」を挙げるために「比較」が必要
+  - 「仮説」と比較すると、データ分析の精度がぐっと上がる
+  ![](/images/yyyymmdd_contents/213.png =600x)
+  ![](/images/yyyymmdd_contents/214.png =600x)
 :::
 
 
