@@ -1,5 +1,5 @@
 ---
-title: "図解：Windows11でWSL2＋DockerによるPython開発環境を構築する手順
+title: "【図解】Windows11でWSL2＋DockerによるPython開発環境を構築する手順
 
 "
 emoji: "🛠"	
