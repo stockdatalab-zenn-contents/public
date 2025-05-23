@@ -176,6 +176,7 @@ setuptools
 numpy
 pandas
 
+beautifulsoup4
 ydata-profiling
 autoviz
 sweetviz
