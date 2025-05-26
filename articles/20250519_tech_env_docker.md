@@ -168,6 +168,7 @@ zenn_work             # 直下のファイルは環境構築用
 FROM jupyter/base-notebook:python-3.10.10
 
 #ローカルのrequirements.txtを、コンテナ内にコピーしてライブラリをインストール
+#requirements.lockを使用する場合は、requirements.txtをrequirements.lockに置換して同様の記載でdockerfileを実行
 COPY requirements.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
 ```
@@ -255,16 +256,33 @@ print('Hello python')
 ![](/images/20250519_tech_env_docker/setting16.png =800x)
 再度、ipynbファイルのセル上でctrl+Enterで実行します。セルの下にエラーが出ることなく「Hello」と表示されればOKです。お疲れ様でした。
 ![](/images/20250519_tech_env_docker/setting17.png =500x)
-<br>
-なお、作成・起動したコンテナは、以下のコマンドで停止または削除できます。
-```sh:Ubuntu-24.04アプリ（Bash）
-docker compose stop   #コンテナの停止のみ
-または
-docker compose down   #コンテナの停止と削除
+
+
+### 5-3. おまけ（主要なコマンド）
+WSLの起動やシャットダウンは以下で実行できます。
+```sh:Power Shell
+wsl ~            #wslの起動
+wsl --shutdown   #wslのシャットダウン
 ```
+Dockerやコンテナの操作は以下のコマンドで実行できます。
+```sh:WSL起動後のPower Shell または Ubuntu-24.04アプリ（Bash）
+docker exec -it [コンテナ名] /bin/bash   #コンテナ内に入る
+exit                                    #コンテナから出る
 
+docker ps -a                            #コンテナの一覧を表示する
+docker images                           #コンテナイメージの一覧を表示する
 
+docker rm [コンテナ名]                   #コンテナを削除する
+docker rmi [コンテナイメージ]             #コンテナイメージを削除する
 
+#docker-compose.yamlがある場合
+docker compose stop       #コンテナの停止のみ
+docker compose down       #コンテナの停止と削除
+
+#docker-compose.yamlがない場合
+docker start [コンテナ名]  #コンテナの起動
+docker stop [コンテナ名]   #コンテナの停止
+```
 
 
 ## さいごに

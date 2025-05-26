@@ -1,5 +1,5 @@
 ---
-title: "大量カラムのEDAどうする？ライブラリの比較とsweetvizの限界を補完する方法"
+title: "大量カラム×自動EDA：sweetvizの弱点をHTMLスクレイピングで克服する方法"
 emoji: "📚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["EDA", "探索的データ分析", "sweetviz", "スクレイピング", "BeautifulSoup"]
@@ -372,7 +372,7 @@ overview = get_dataOverview(soup, overviewCsvfile_path)
 
 
 ### 参考：sweetvizで出力される相関値について
-sweetvizでは、変数間の関係性を可視化する「相関値」が自動で出力されますが、以下の通り***変数の型の組み合わせによって使用される指標が異なります**。
+sweetvizでは、変数間の関係性を可視化する「相関値」が自動で出力されますが、以下の通り**変数の型の組み合わせによって使用される指標が異なります**。
 
 |  相関の種類                | 使用される指標 | 値の範囲 | 値の範囲 |
 |     ----                   |  ----          |  ----    |  ----    |
