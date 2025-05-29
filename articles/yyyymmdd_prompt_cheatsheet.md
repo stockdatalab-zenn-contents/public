@@ -86,6 +86,22 @@ published: false
 
 
 
+## 記事を宣伝する
+```txt:チャプターを把握させる
+#以下の文面でSNSでブログの記事を宣伝しようとしています。
+#文章を推敲し、全文リライト版の提示をお願いします。
+-------
+Zennに環境構築に関する記事を上げました✏
+良かったら見てください。
+
+■Python環境構築ガイド：venv・Docker・クラウドの選び方と使い分け
+https://zenn.dev/stockdatalab/articles/20250518_tech_env
+■【図解】Windows11でWSL2＋DockerによるPython開発環境を構築する手順
+https://zenn.dev/stockdatalab/articles/20250519_tech_env_docker
+
+```
+
+
 
 ## Copilot in Edgeで動画を要約させる
 ```txt:チャプターを把握させる
