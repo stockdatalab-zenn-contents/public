@@ -67,7 +67,7 @@ LLMを使いこなすには、大きく以下の2つの力が求められます�
 
 ### 補足：ローカルLLM環境の構築でよく使われる構成
 企業での生成AI活用においては、セキュリティの観点からローカル実行が重視される場面も増えています。開発においては、**Docker+Ollama+Open WebUI**の構成がよく使われています。ただし、**NVIDIA製のGPUが必須**となることが多く、ハードウェア要件には注意が必要です。
-![](/images/yyyymmdd_backup/localLLMenv.png =600x)
+![](/images/20250607_tech_nlpai/localLLMenv.png =600x)
 
 
 
