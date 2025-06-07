@@ -210,7 +210,7 @@ services:
   jupyterlab:
     build: 
       context: .
-      dockerfile: ./dockerfile
+      dockerfile: ./Dockerfile
     image: zenn0
     container_name: zenn0_c
     ports:
