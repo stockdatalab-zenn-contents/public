@@ -149,12 +149,8 @@ Ubuntu上で起動させたVSCodeに拡張機能「Docker」をインストー�
 ※Dockerについては、記事「[Dockerによる開発環境構築のための概念理解と方法解説](https://qiita.com/S4nTo/items/977d28b0eac316915702)」が参考になりました。実際に環境構築する前に一読いただくと、より理解が深まると思います。
 
 ### 4-1. DockerImageを作成する
-Dockerfile（+ requirements.txt または requirements.lock）からDockerImageをつくります。Ubuntu内の「dockerfile」を配置したディレクトリで以下のコマンドを実行します。本ガイドではベースイメージとして、DockerHubの「[jupyter/base-notebook:python-3.10.10](https://hub.docker.com/layers/jupyter/base-notebook/python-3.10.10/images/sha256-ec1988a6a88770b7fcb0e8ffe191c2b54ca7994fac41484e072ac6bc6ac5126b?context=explore)」を使用します。
+Dockerfile（+requirements.txt または requirements.lock）からDockerImageをつくります。Ubuntu内の「Dockerfile」などを配置したディレクトリに移動します。なお、本ガイドではベースイメージとして、DockerHubの「[jupyter/base-notebook:python-3.10.10](https://hub.docker.com/layers/jupyter/base-notebook/python-3.10.10/images/sha256-ec1988a6a88770b7fcb0e8ffe191c2b54ca7994fac41484e072ac6bc6ac5126b?context=explore)」を使用します。
 
-```sh:Ubuntu-24.04アプリ（Bash）
-docker build -t zenn0 .
-docker images
-```
 ```sh:コマンド実行場所（zenn_workフォルダ）配下のフォルダ構成
 zenn_work             # 直下のファイルは環境構築用
 │  Dockerfile
@@ -199,12 +195,14 @@ optuna
 optuna-integration[lightgbm]
 mlflow
 ```
+移動したら、以下のコマンドを実行します。
+```sh:Ubuntu-24.04アプリ（Bash）
+docker build -t zenn0 .
+docker images
+```
 ### 4-2. コンテナを作成する
 Ubuntu内の「docker-compose.yaml」（ポートやマウントの設定も含む）を配置したディレクトリで以下のコマンドを実行します。
-```sh:Ubuntu-24.04アプリ（Bash）
-docker compose up -d
-docker ps -a
-```
+
 ```sh:docker-compose.yamlの例
 services:
   jupyterlab:
@@ -224,6 +222,10 @@ services:
       TZ: "Asia/Tokyo"
     tty: true
     restart: always
+```
+```sh:Ubuntu-24.04アプリ（Bash）
+docker compose up -d
+docker ps -a
 ```
 ![](/images/20250519_tech_env_docker/setting12.png =800x)
 
@@ -245,8 +247,15 @@ code .
 ![](/images/20250519_tech_env_docker/setting13.png =800x)
 左下にコンテナ名が表示されたVSCodeのウィンドウが新しく開き、コンテナ内のソースを編集できるようになります。「フォルダを開く」でローカルとマウントしているコンテナ内の場所を指定します。
 ![](/images/20250519_tech_env_docker/setting14.png =800x)
-コンテナ上のVSCodeでファイルを作成して保存する[^4]と、Windowsのエクスプローラー（マウント先）から保存したファイルを参照できます。
+コンテナ上のVSCodeでファイルを作成して保存すると、エクスプローラー（Linuxのマウント先）から保存したファイルを参照できます。
 ![](/images/20250519_tech_env_docker/setting15.png =800x)
+
+権限がなくて保存できない場合は、保存先のフォルダに権限を付与します。
+```sh:Ubuntu-24.04アプリ（Bash）
+docker exec -it [コンテナ名] /bin/bash   #コンテナ内に入る
+chmod -R 777 ./work			#フォルダ（とその配下）に権限を付与する
+exit                                    #コンテナから出る
+```
 
 ### 5-2. pythonの動作確認をする
 ipynbファイルのセルに以下を入力して、ctrl+Enterで実行しようとすると、右下や上部にメッセージが表示されます。表示されたメッセージに従って、必要なものをコンテナ上にインストールします。
@@ -262,7 +271,7 @@ print('Hello python')
 WSLの起動やシャットダウンは以下で実行できます。
 ```sh:Power Shell
 wsl ~            #wslの起動
-wsl --shutdown   #wslのシャットダウン
+wsl --shutdown   #wslのシャットダウン（コンテナ停止後の実行を推奨）
 ```
 Dockerやコンテナの操作は以下のコマンドで実行できます。
 ```sh:WSL起動後のPower Shell または Ubuntu-24.04アプリ（Bash）
@@ -301,6 +310,3 @@ Docker環境を構築する際のメジャーなソフトフェアは「Docker D
 2021-2022に有償化されています。
 
 [^3]: GPG鍵とは、ソフトウェアの信頼性を検証するために使われる暗号鍵です。
-
-[^4]:保存できない場合は、記事[Dockerが作成したWSL上のファイルをVSCodeで編集・保存する方法
-](https://zenn.dev/conbrio/scraps/d1fb667b2e00a4)を参考にしてみてください。
