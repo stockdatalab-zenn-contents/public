@@ -259,7 +259,7 @@ exit                                    #コンテナから出る
 
 ### 5-2. pythonの動作確認をする
 ipynbファイルのセルに以下を入力して、ctrl+Enterで実行しようとすると、右下や上部にメッセージが表示されます。表示されたメッセージに従って、必要なものをコンテナ上にインストールします。
-```py:zenn.py
+```py:zenn.ipynb
 print('Hello python')
 ```
 ![](/images/20250519_tech_env_docker/setting16.png =800x)
