@@ -2,150 +2,160 @@
 title: "■内部用■下書き"
 emoji: "🗣"	
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["クローリング", "スクレイピング", "銘柄", "個別株", "投資"]
+topics: ["Ollama", "Open WebUI", "LLM", "生成AI", "環境構築"]
 published: false
 ---
 
 #SEOも加味して全文の推敲や構成の提案し、リライト版の提示をお願いします。
 
 #以下はブログの一部です。
-#仮のタイトルは「【図解でわかる】BERTの仕組みと進化の流れ：Attention・Transformerの基本から理解する」です。
+#仮のタイトルは「【図解】OllamaとOpen WebUI でローカルLLMの環境構築する手順|大規模言語モデル・生成AIをローカルで動かす」です。
 #理解しましたか。
 --------
 ## はじめに
-自然言語処理（NLP）で注目される技術の一つが「BERT」です。Googleが開発したこのモデルは、検索エンジンや文章理解タスクで高い性能を発揮します。自然言語処理の手法・加味できることは、下図のように進化してきました。本記事では、特にRNN・LSTM以降の技術革新に焦点を当てながら、BERTの仕組みを解説していきます。
-![](/images/20250614_tech_nlpbert/nlp_flow.png =400x)
-
-## 1. RNN（再帰ニューラルネットワーク）
-BoWやWord2Vecでは、単語の並び順に関する情報を保持できません。これを補完する方法にRNNが挙げられます。RNNは、時系列を扱うのが得意なニューラルネットワークの１つです。**文章も単語が順に並んでいるという点で、時系列データとみなして**RNNで扱うことができます。
-
-RNNのイメージは以下の通りで、「**現在の入力値と前回の出力値を合計して出力する**」処理を繰り返しています。これにより、**入力される単語の順番（≒文脈）を踏まえた処理ができます**。一で、**長文になるほど「過去の情報」が忘れられてしまう**（長文になるほど文脈を捉えられなくなる）という「長期依存性の問題」があります
-![](/images/20250614_tech_nlpbert/rnn.png =800x)
-
-## 2. LSTM (長・短記憶)
-RNNの「長期依存性の問題」を補うモデルとしてLSTMが挙げられます。RNNもLSTMも再帰処理を行う点は同じですが、複数のゲートを持つ隠れ層により、**情報の取捨選択を自動的に行える**点が特徴です。主な構成要素は以下の通りです。
-- CEC：過去のデータを保存する要素
-- 忘却ゲート：CECの中身をどの程度残すか調整する要素
-- 入力ゲート：前回の入力をどの程度受け取るか調整する要素
-- 出力ゲート：前回の出力をどの程度受け取るか調整する要素
-
-これらの仕組みにより、**RNNよりは文脈を捉えた処理ができるようになりました**。
-![](/images/20250614_tech_nlpbert/lstm.png =800x)
-
-上記のような計算手法を用いたモデルに「**Seq2Seq**」が挙げられます。このモデルは処理の途中で、文全体を1つの固定長ベクトルに圧縮して表現します。この方法は短文には有効ですが、**文が長いほど１つの固定長のベクトルでは意味を表現しきれず、精度が落ちる**という問題があります。
-![](/images/20250614_tech_nlpbert/seq2seq.png =800x)
-
-## 3. Attention（注意機構）
-LSTMでも長文処理には限界がありました。そこで、より長文を処理できるように、Attentionという技術が開発されました。Attentionは、**出力するごとに「どの入力単語に注目すべきか」を毎回計算し、適切に情報を抽出する**仕組みです。これにより、RNNやLSTMよりも柔軟に対応できるようになります。Attentionは、以下のように**Query・Key・Value**の３つのベクトルで計算されます。
-- **Query**：入力されたもののうち、検索をかけたいもの
-- **Key**：検索対象とQueryの近さを測る
-- **Value**：Keyに基づき出力されたもの
-
-![](/images/20250614_tech_nlpbert/attention.png =800x)
-<br>
-代表的なAttentionの種類は以下の通りです。
-- **Self-Attention**
-入力と記憶が同一のAttention。文法構造や単語同士の関係性などを得るために使われる。
-![](/images/20250614_tech_nlpbert/self-attention.png =600x)
-- **SourceTarget-Attention**
-入力と記憶が異なるAttention。Transformerではデコーダーとして使われる。
-![](/images/20250614_tech_nlpbert/sourcetarget-attention.png =600x)
-- **Multi-Head Attention**
-複数のAttentionを並行に実行する。BERTで使用されている。
-- **Masked Multi-Head Attention**
-特定のKeyに対してAttentionWeightを0にする。Transformerではデコーダーとして使われる。入力した単語の先読み（カンニング）を防ぐために、情報をマスク（遮断）する。
-
-## 4. Transformer
-RNNでは、単語を一つずつ順番に処理する必要があるため、並列化が難しく、学習に時間がかかります。さらに、RNNでもLSTMでも「長期依存性の問題」の問題もありました。Transformerは、**Attentionの仕組みだけを使って**文を処理することで、これらの課題を解消したモデルです。
-![](/images/20250614_tech_nlpbert/transformer.png =600x)
-*左の図は論文「Attention Is All You Need.」(2017)より引用*
-
-<br>
-Transformerの主な特徴は以下の３つです。
-- **Self-Attention**が導入されている
-これにより、**文法構造や単語同士の関係性**を把握できます。
-- **Multi-Head Attention**が導入されている
-これにより、並列処理が可能な構造を活かして、
-全単語を一度に入力して**高速かつ高精度な処理**を実現できます。
-- **ポジショナルエンコーディング**が導入されている
-これにより、**単語の位置情報**が把握できます。
-
-## 5. BERT
-BERTは、**Transformerのエンコーダ部分のみ**を活用した構造を持つモデルです。2018年にGoogleによって発表され、NLPタスクの多くで従来モデルを上回る性能を記録しました。
+ChatGPTなどの生成AIが普及する中、「ローカル環境で大規模言語モデル（LLM）を動かしたい」と考える方も増えてきました。とはいえ、LLMのセットアップには専門知識が必要で、「何から始めればいいのか分からない」「軽量モデルってどこで動かせるの？」と迷う人も多いと思います。本記事では、**Ollama**と**Open WebUI**というツールを使って、**ローカル（Docker上）でLLMを動かすための環境構築手順**を、図解を交えて解説します。
 
 
-
-### BERTの特徴
-- **学習の仕組み：事前学習＋ファインチューニング**
-BERTでは以下の2つのタスクを通して**事前学習**を行います。
-  - **Masked Language Model**
-文中の単語を一部隠して、正しい単語を予測します。
-  - **Next Sentencee Prediction**
-２文が連続するものかどうかを予測します。
-
-その後、タスクに応じたファインチューニングを行います。従来の事前学習モデルでは、大量の教師データを使用して、タスクごとに学習していたのに対し、BERTでは、少量の教師データで、事前学習された共通のニューラルネットワークをタスクに応じて**ファインチューニング**することで学習できます。ファインチューニングの際には、出力層を修正することで対応しています。
-![](/images/20250614_tech_nlpbert/bert_train.png =600x)
+構築する環境のイメージ図は以下です。コンテナを２つ作ってChatGPTのようにブラウザからプロンプトを打てるようにします。**PCにNVIDIA製のGPUと搭載していないとOllamaを扱えないようなのでご注意ください**。
+![](/images/yyyymmdd_backup/setting1.png =600x)
+なお、筆者のPCは「ASUS ゲーミングノートPC：FX707VV-I7R4060A5200」（OS:Windows11、CPU：インテル Core i7-13620H プロセッサー、メモリ：16GB、ストレージ：1TB、GPU：NVIDIA GeForce RTX 4060）です。
 
 
-- **双方向表現**
-単語を予測する際に、前後両方の単語を同時に参照することで、
-文全体の意味をより正確に捉えられます。
-
-- **入力ベクトルの構成**
-**単語＋文＋位置**の3つの情報を合算したベクトルを入力とします。
-![](/images/20250614_tech_nlpbert/bert_input.png =800x)
-
-### BERTの種類
-- **cl-tohoku/bert-base-japanese-v3**
-東北大学により開発された日本語BERTモデルで、日本語Wikipediaをコーパスとして学習されています。多くの日本語NLPタスクにおいてベースラインとして広く使用されています。
-
-- **日本語 ModernBERT**
-cl-tohoku/bert-base-japanese-v3よりも長文を処理できます。
-
-- **LUKE Japanese Large**
-BERTを基盤としながらも固有表現抽出に特化した構成が特徴です。日本語データにも対応し、意味的な情報抽出性能に優れています。
+## 1. Docker環境を構築する
+記事「[【図解】Windows11でWSL2＋DockerによるPython開発環境を構築する手順](https://zenn.dev/stockdatalab/articles/20250519_tech_env_docker)」の「1. WSL2でUbuntuをインストールする」「2. Docker EngineをUbuntuにインストールする」を参照ください。
+### ここまでの完成図
+![](/images/yyyymmdd_backup/env1.png =400x)
+**これ以降、Linux上でコマンドを実行します**。ubuntuのbashを起動させるか、PowerShell上で`wsl ~`でwslを起動させてから後続の作業を進めてください。
+![](/images/yyyymmdd_backup/setting2-1.png =600x)
+![](/images/yyyymmdd_backup/setting2-2.png =600x)
 
 
+## 2. Ollama用のコンテナを作成する
+### 2-1.NVIDIA Container Toolkitをインストールする
+[NVIDIAのガイド](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)や[Ollamaのガイド](https://github.com/ollama/ollama/blob/main/docs/docker.md)に沿ってインストールします。
+```sh:Linux上で実行
+$ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+$ sudo apt-get update
+$ sudo apt install -y nvidia-container-toolkit
+```
+インストールが完了したら、dockerデーモンを再起動します。
+```sh:Linux上で実行
+$ sudo systemctl restart docker
+```
 
-### BERTでできること（活用例一覧）
-| 活用領域    | タスク例                  |
-| ------- | -------------------- |
-| テキストの理解 | 文の意味理解、感情分析、カテゴリ分類など |
-| 文と文の比較  | 類似性判定、含意判定（NLI）、重複検出 |
-| 単語の意味解析 | 品詞、固有表現抽出、意味予測       |
-| QA・文脈理解 | 文脈から情報を抽出            |
+### 2-2.Ollama用のコンテナを作成・起動する
+[Ollamaのガイド](https://github.com/ollama/ollama/blob/main/docs/docker.md)に沿って、コンテナを作成・起動します。
+```sh:Linux上で実行
+$ docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+```
+
+### 2-3. NVIDIA Container Toolkitの動作確認をする
+コンテナ内外で`nvidia-smi`を実行した時に、同様の出力がされればOKです。
+```sh:Linux上で実行
+$ nvidia-smi
+$ docker exec -it ollama /bin/bash
+$ nvidia-smi
+```
+![](/images/yyyymmdd_backup/setting3.png =800x)
 
 
-### BERT以降のモデル
-- **DistilBERT**
-BERTのパラメータ数を削減して軽量化したモデルで、元の性能をおおむね維持しつつも高速に推論が可能となるよう設計されています。
+### ここまでの完成図
+![](/images/yyyymmdd_backup/env2.png =400x)
 
-- **RoBERTa**
-BERTの事前学習手法を最適化することで、より高い精度を実現したモデルです。特に訓練データの量や学習手順の見直しがなされています。
+## 3. OllamaのlibraryにあるLLMをコンテナに乗せる
+使いたいモデルを[Ollamaのlibrary](https://ollama.com/library)からインストールします。例えば、Llama（llama3.1:8b）をダウンロードする場合は、以下のコマンドを実行します。
+```sh:Linux上で実行
+$ docker exec ollama ollama pull llama3.1:8b
+```
+サイズが大きいLlama4やMistral-largeは精度が良く実用的なようですが、個人用PCでの利用はおすすめしません。インストールに３時間程度かかる上に、結局PCのスペック不足で動かないことが多いようです。
 
-- **Electra**
-Masked Language Modelではなく、入力文中の単語が置き換えられているかどうかを判別するタスク（置換検出）により事前学習を行うモデルで、学習効率の高さが特徴です。
-
-- **GPT**
-デコーダベースの自己回帰型モデルで、自然言語の生成を目的として設計されています。文生成・要約・会話などの生成タスクにおいて高い性能をします。
+### ここまでの完成図
+![](/images/yyyymmdd_backup/env3.png =400x)
 
 
+## 4. 任意:OllamaのlibraryにないLLMをコンテナに乗せる
+Ollamaのlibraryにないモデルであっても、gguf形式のモデルであればOllamaで動かすことができます。本記事ではELYZA（Llama-3-ELYZA-JP-8B）をコンテナに乗せる方法を紹介します。
 
-### おまけ：BERTと生成AIの違い
-BERTと生成AI（例：Mistral, GPT, ClaudeなどのLLM）は、目的・構造・学習方法・出力形式などが異なります。
+### 4-1. gguf形式のモデルファイルをダウンロードする
+[hugging faceのページ](https://huggingface.co/elyza/Llama-3-ELYZA-JP-8B-GGUF/tree/main)から「Llama-3-ELYZA-JP-8B-q4_k_m.gguf」をダウンロードします。
 
-| 観点         | BERT                                                          | 生成AI（MistralなどのLLM）               |
-| ---------- | ------------------------------------------------------------- | --------------------------------- |
-| **モデルの種類** | Encoder型（双方向）                                                 | Decoder型（自己回帰型）                   |
-| **処理の目的**  | 文の理解<br>（分類・抽出・意味判定など）                                      | テキストの生成<br>（回答・文章作成・要約など）       |
-| **出力の性質**  | 入力に対する固定長の特徴量・スコア                                             | 入力に続く自然な文章（連続トークン）                |
-| **学習方式**   | Masked Language Model（MLM）<br>Next Sentence Prediction（NSP）など | Causal Language Modeling<br>（次の単語を予測） |
-| **主な用途**   | 感情分析・分類・固有表現抽出・<br>意味判定・検索強化                                      | 会話応答・文生成・要約・<br>翻訳・自動コード生成            |
+### 4-2. Modelfileを作成する
+モデルの作成に必要な情報を記載したModelfileファイルを作成します。
+```txt:Modelfile
+FROM ./Llama-3-ELYZA-JP-8B-q4_k_m.gguf
+TEMPLATE """{{ if .System }}<|start_header_id|>system<|end_header_id|>
+
+{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+
+{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
+
+{{ .Response }}<|eot_id|>"""
+PARAMETER stop "<|start_header_id|>"
+PARAMETER stop "<|end_header_id|>"
+PARAMETER stop "<|eot_id|>"
+PARAMETER stop "<|reserved_special_token"
+```
+
+### 4-3. gguf形式のモデルとModelfileをコンテナ内に配置する
+PCのローカルにあるgguf形式のモデルとModelfileを、コンテナ内の同じ場所に配置します。
+```sh:Linux上で実行
+$ cd [現状の配置場所]  						#gguf形式のモデルとModelfileが配置されている場所に移動
+$ ls -ltr									#gguf形式のモデルとModelfileが配置されていることを確認
+$ docker cp ./Llama-3-ELYZA-JP-8B-q4_k_m.gguf ollama:/Llama-3-ELYZA-JP-8B-q4_k_m.gguf	#gguf形式のモデルをコンテナ内にコピー
+$ docker cp ./Modelfile ollama:/Modelfile	#Modelfileをコンテナ内にコピー
+```
+![](/images/yyyymmdd_backup/setting4.png =800x)
+
+### 4-4. モデルを作成・起動する
+（Ollama用のコンテナが起動している状態で）以下を実行します。実行後に「success」と表示されればOKです。
+```sh:Linux上で実行
+$ docker exec ollama ollama create elyza:jp8b -f Modelfile
+```
+![](/images/yyyymmdd_backup/setting5.png =800x)
+
+### ここまでの完成図
+![](/images/yyyymmdd_backup/env4.png =400x)
+
+
+## 5. Open WebUI用のコンテナを作成する
+以下を実行し、Open WebUI用のコンテナを作成してOllama用のコンテナと繋いで起動します。
+```sh:Linux上で実行
+$ docker run -d -p 3000:8080 --env WEBUI_AUTH=False --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+```
+
+### ここまでの完成図
+![](/images/yyyymmdd_backup/env5.png =600x)
+
+
+
+## 6. 動作確認する
+### 6-1. LLMをブラウザから動かしてみる
+ブラウザで`http://localhost:3000/`にアクセスして、モデルが使えるか確認します。
+![](/images/yyyymmdd_backup/setting6.png =800x)
+
+### 6-2. おまけ（よく使うコマンド）
+Ollamaを再起動する時は以下を実行します。
+```sh:Linux上で実行
+$ docker restart ollama
+```
+インストールしたモデル（例：llama3.2:3b）を削除したい時は以下を実行します。
+```sh:Linux上で実行
+$ docker exec ollama ollama rm llama3.2:3b
+```
+一度Linuxを停止した後、再度LLMを使う際は以下を実行します。
+```sh:Linux上で実行
+$ docker start ollama	# Open WebUIはOllamaと一緒に起動される
+
+$ docker stop open-webui	# open-webui用のコンテナを停止する
+$ docker stop ollama		# Ollama用のコンテナを停止する
+$ exit				# wslの外に出る
+$ wsl --shutdown	# wslを停止する
+```
+
 
 
 ## おわりに
-本記事では、自然言語処理モデルの進化を、RNNからBERTまで整理しました。BERTは、TransformerとAttentionの発展の集大成であり、現在主流となっているLLM（大規模言語モデル）や生成AIの基礎にもなっています。
-
-BERTは、その技術的な完成度だけでなく、「**これまでの課題をどのように乗り越えたのか**」という点でも非常に学びの多いモデルです。こうした背景を知ることで、モデルを「使うだけ」ではなく「理解して選ぶ力」も養われると思います。
-
-
+今回は、OllamaとOpen WebUIを使ってローカル環境でLLM（大規模言語モデル）を動かす方法を解説しました。Dockerを活用することで、OSに依存せず再現性の高い環境を構築でき、生成AIを手元で自由に扱えるようになります。今回の手順をもとに、ぜひご自身の環境でもLLMを立ち上げ、モデルのカスタマイズや応用にチャレンジしてみてください。
