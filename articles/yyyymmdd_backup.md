@@ -73,12 +73,12 @@ model, templates, chainsなどを連結する機能です。
 ::: 
 
 
-### 3-2. ツールやライブラリなどのインストール
+### 3-2. ツールやライブラリなどをインストールする
 LLM内部では以下のような処理を実行します。（スクリーンショットやOCR処理をしなくても、スクレイピングやクローリングでも技術的には目的を達成できますが、サイトの規約で禁止されている場合が多いので、この方法で掲載内容を取得します。）処理に必要なツールやライブラリなどのインストールします。
 ![](/images/yyyymmdd_backup/action.png =800x)
 #### 3-2-1. Tesseractのインストール
 OCR処理を実行するために必要なソフトウェアエンジン「Tesseract」をLinuxにインストールします。後続の手順でインストールするpythonライブラリ「pytesseract」に必要なものです。
-```bash:★★★
+```bash:Linux上で実行
 sudo apt update
 sudo apt install tesseract-ocr tesseract-ocr-jpn
 ```
@@ -87,8 +87,9 @@ Google Chromeを自動操作するためのWebDriver「ChromeDriver」をイン�
 
 #### 3-2-3. ライブラリのインストール 
 LangChainを扱うためのライブラリを1.で構築したコンテナにインストールします。
-```bash:★★★
-!pip install pillow pytesseract selenium langchain langchain-community
+```bash:Linux上で実行
+# コンテナに入る★★★
+pip install pillow pytesseract selenium langchain langchain-community
 ```
 コンテナ上にpyファイルを作成し、ライブラリをインポートします。
 ```py:langchainAPI.py
