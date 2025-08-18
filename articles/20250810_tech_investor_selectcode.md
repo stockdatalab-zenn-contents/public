@@ -16,7 +16,7 @@ published: false
 
 ![](/images/20250810_tech_investor_selectcode/env0.png =800x)
 
-## 1. Dockerでpythonを扱える環境を構築する
+## 1. Docker環境を構築する
 Dockerでpythonを扱える環境を構築します。手順は、記事「[【図解】Windows11でWSL2＋DockerによるPython開発環境を構築する手順](https://zenn.dev/stockdatalab/articles/20250519_tech_env_docker)」を参照ください。Dockerfileなどの資材は以下を使用しました。
 
 ```sh:Dockerfile

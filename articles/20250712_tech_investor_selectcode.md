@@ -1,5 +1,5 @@
 ---
-title: "デイトレーダーがチャートと出来高・株価から、pythonで投資銘柄を選定する方法１"
+title: "デイトレーダーがチャートと出来高・株価から、pythonで投資銘柄を選定する方法１（OCRを利用して銘柄一覧を作成する）"
 emoji: "💹"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["OCR", "Docker", "python", "株", "スクリーニング"]
