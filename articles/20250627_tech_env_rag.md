@@ -1,5 +1,5 @@
 ---
-title: "【図解】OllamaとOpen WebUI でローカルLLMのRAG環境を構築する手順|RAGをDockerで動かす"
+title: "【図解】OllamaとOpenWebUI でローカルLLMのRAG環境を構築する手順|RAGをDockerで動かす"
 emoji: "👨‍🏫"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Ollama", "Open WebUI", "RAG", "生成AI", "環境構築"]
@@ -12,6 +12,17 @@ published: true
 ![](/images/20250627_tech_env_rag/env0.png =800x)
 
 なお、筆者のPCは「ASUS ゲーミングノートPC：FX707VV-I7R4060A5200」（OS:Windows11、CPU：インテル Core i7-13620H プロセッサー、メモリ：16GB、ストレージ：1TB、GPU：NVIDIA GeForce RTX 4060）です。
+
+
+## 0. OpenWebUIを使用するメリット
+OpenWebUIを使用することで、**RAGやUIを比較的小さい工数で構築**できます。RAGを構築する際は通常、PDFなどの資料をデータベースに登録して、「分割」「ベクトル化」「検索の仕組みづくり」など面倒な作業が必要です。しかし、OpenWebUI なら、以下のような便利な機能を利用できます。
+- PDFなどの資料をドラッグ＆ドロップするだけで登録できる
+- 自動で文書を小さく分けて（チャンク分割して）ベクトル化してくれる
+- コレクションごとに文書をまとめて管理できる
+（「どの知識を使って回答するか」をコレクション単位で切り替えられて、管理が容易。）
+- 登録した文書を チャット画面からすぐ参照できる
+
+また、同ネットワーク内でPCをクラスター構成にすることで、１台のPC上で構築したOpenWebUIのRAG環境を、HTTP通信により複数のPCで共用することも可能です。
 
 
 ## 1. Docker環境を構築する
