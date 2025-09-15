@@ -1,5 +1,5 @@
 ---
-title: "大きなテーブルデータの最適化手法：pandas・polars・Daskで速く扱う"
+title: "大きなテーブルデータの最適化手法：pandas・polars・Daskで高速化・効率化"
 emoji: "😎"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["大規模", "大容量", "テーブルデータ"]
