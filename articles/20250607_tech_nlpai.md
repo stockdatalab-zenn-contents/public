@@ -1,5 +1,5 @@
 ---
-title: "自然言語処理と生成AI・LLMを組み合わせるために必要な知識：初心者向け"
+title: "生成AIやLLMを活用した自然言語処理に必要な知識：初心者向け"
 emoji: "🛸"	
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["LLM", "生成AI", "NLP", "ローカル", "スキル"]
