@@ -1,5 +1,5 @@
 ---
-title: "動画生成AI「Runway」（Gen-4含む）の料金プランと機能を解説"
+title: "動画生成AI「Runway」（Gen-4含む）の料金プランと機能のまとめ"
 emoji: "🤖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["動画生成AI", "Runway", "Gen4"]
