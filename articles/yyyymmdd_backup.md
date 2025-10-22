@@ -1,595 +1,338 @@
 ---
-title: "■内部用■下書き"
+title: "■内部用■ADHD優位ASD併存"
 emoji: "🗣"	
-type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Ollama", "Open WebUI", "RAG", "生成AI", "環境構築"]
+type: "idea" # tech: 技術記事 / idea: アイデア
+topics: []
 published: false
 ---
+## 1. 人物像
+### 1-1.サマリ
+高い知性と責任感を持ち、ADHD的な注意のムラやASD的な構造志向を同時に抱えている。つまり、**刺激への敏感さ（ADHD的覚醒）＋秩序を求める性質（ASD的補正） の二層構造を持ち**、行動的な混乱を防ぐために、几帳面・先回り・構造化を行う（秩序を作り出す）傾向がある。
+| 項目    | 強み        | 弱み          |
+| ----- | --------- | ----------- |
+| 注意・集中 | 過集中力・正確性  | 優先順位づけが苦手   |
+| 思考    | 論理的・分析的   | 柔軟な発想が苦手    |
+| 感情    | 冷静・安定     | 自己否定・評価過敏   |
+| 行動    | 計画的・前倒し   | 想定外に弱い      |
+| 対人関係  | 誠実・信頼性が高い | 会話や即応が苦手    |
+| 環境適応  | 自律的に働ける   | 刺激に敏感・疲れやすい |
 
-#SEOも加味して全文の推敲や構成の提案し、リライト版の提示をお願いします。
+### 1-2.基本情報
+1995年生まれの女性。知能は高く、やや完璧主義。
+ADHD傾向が優位、ASD傾向も併せ持つ（いずれも臨床的な障害レベルではない）。
 
-#以下はブログです。
-#仮のタイトルは「デイトレーダーがチャートと出来高・株価から、pythonで投資銘柄を選定する方法２」です。
-#理解しましたか。
---------
+### 1-3.対人・コミュニケーション
+- 言葉がうまく出ず、焦るとパニックになり余計に言葉が出ない。
+- 自分の考えを言語化することに強い抵抗があり、会話が苦手。
+- 周囲を巻き込む力はあまり強くない。
+- 相手の話を途中で遮ってしまうことがある。
+- ただし、忘れ物や遅刻などの「社会的ルールの遵守」は高い水準でできている。
 
+### 1-4.こだわり・興味
+- 自分の生活に直接役立つこと（例：株式投資）への関心が非常に強く、深く探求できる。
+- 興味のない分野には関心が持てない。
+- 想定外の変更や急な予定に強いストレスを感じる。
+- 一方で、単調な環境が続くと刺激を求める。
 
+### 1-5.感覚・認知特性
+- 光や音などの刺激に敏感。
+- 全体よりも細部への注意が強い（分析的傾向）。
 
+### 1-6.感情・ストレス反応
+- 感情表現は控えめで、感情の起伏は小さい。
+- 他者評価や失敗に敏感で、自己否定的になりやすい。
+- 「嫌なことを避けるために努力する」という合理的な回避行動ができる。
+- 締め切りのある仕事は前倒しで進める傾向がある（自己管理意識は高い）。
 
-## はじめに
-ローカル環境でLLMを動かすだけで満足していませんか？LangChainを使えば、単なるチャットだけでなく、外部ツールとの連携・ナレッジベースの活用・記憶機能など、本格的なアプリケーションの構築が可能になります。
+### 1-7.注意・集中・行動
+- マルチタスクが苦手で、一つのことに集中しやすい。
+- 集中力の波が大きいが、知的好奇心が高く学習への抵抗がない。
+- 好きなことへの没頭力が強い。
+- ケアレスミスは少なく、細部まで正確に仕上げようとする。
+- 頭の中が常にフル稼働しており、リラックスが難しい。
 
-本記事では、**Docker上に構築したOllama＋Open WebUIベースのローカルLLMを、LangChainで動かす方法**を、LangChainの主な機能の解説や図解を交えて解説します。
+### 1-8.仕事・生活スタイル
+- 対人関係が少ない職種で高いパフォーマンスを発揮する。
+- スケジュールやタスクの見積もりが苦手（優先順位づけも課題）。
+- ただし、整理整頓は得意。
+- 厳格なルールや上下関係より、柔軟で自律的な環境のほうが成果を出しやすい。
+- 発想力・創造性よりも、分析・実行・管理の精度の高さで貢献するタイプ。
 
-構築する環境のイメージ図は以下です。投げられたプロンプトとURLリスト（txtの外部文書）をもとに、ローカルLLMで回答を生成する仕組みを構築します。
-![](/images/yyyymmdd_backup/env0.png =800x)
+:::details プロンプト
 
-なお、筆者のPCは「ASUS ゲーミングノートPC：FX707VV-I7R4060A5200」（OS:Windows11、CPU：インテル Core i7-13620H プロセッサー、メモリ：16GB、ストレージ：1TB、GPU：NVIDIA GeForce RTX 4060）です。
-
-
-## 1. Dockerでpythonを扱える環境を構築する
-記事「[【図解】Windows11でWSL2＋DockerによるPython開発環境を構築する手順](https://zenn.dev/stockdatalab/articles/20250519_tech_env_docker)」を参照ください。
-### ここまでの完成図
-![](/images/yyyymmdd_backup/env1.png =400x)
-
-
-## 2. ローカルLLMを扱える環境を構築する
-記事「[【図解】OllamaとOpen WebUI でローカルLLMの環境構築する手順|大規模言語モデル・生成AIをDockerで動かす](https://zenn.dev/stockdatalab/articles/20250626_tech_env_llm)」を参照ください。
-### ここまでの完成図
-チャット用モデルはLlamaやELYZAなどを、Embedding用モデルはnomic-embed-textなどを指しています。
-![](/images/yyyymmdd_backup/env2.png =600x)
-
-
-## 3. LangChainでOllama上のモデルを扱えるようにする
-### 3-1. LangChainでできること
-実際に環境を整える前に、LangChainの主要な６つの機能について簡単に触れておきます。公式の説明は[こちら](https://python.langchain.com/api_reference/langchain/index.html)から参照できます。
-![](/images/yyyymmdd_backup/langchain.png =800x)
-:::details LangChainの主要な６つの機能
-#### 1. models
-LangChainで使用するモデルを指定する機能です。以下の3種類があります。
-  - **chat_models**：チャットモデル用
-  - **embeddings**：テキストをベクトル化するモデル用
-  - **llms**：大規模言語モデル用
-<br>
-#### 2. prompts
-モデルへの入力を組み立てる機能です。以下の4種類があります。
-  - **prompt templates**
-  プロンプトを、プログラムで扱いやすいテンプレートの形します。
-  - **chat prompt templates**
-  チャット形式のプロンプトを、役割や発話単位で構造的にテンプレート化します。
-  - **example selectors**
-  複数の例から、入力に最も関連するサンプルを動的に選択してプロンプトに挿入します。
-  - **output parsers**
-  LLMの出力結果を、プログラムで扱いやすい構造に変換します。
-<br>
-#### 3. chains
-model, templates, chainsなどを連結する機能です。
-<br>
-#### 4. retrieval
-ベクトル化（数値化）した外部文書を踏まえてモデルに回答させることができる機能です。
-  
-<br>
-#### 5. memory
-モデルにこれまでのやりとりを踏まえた入力をできる機能です。
-<br>
-#### 6. agents
-モデルが様々なツールを選択しながら動作できるようにする機能です。
-::: 
-
-
-### 3-2. ツールやライブラリなどをインストールする
-LLM内部では以下のような処理を実行します。（スクリーンショットやOCR処理をしなくても、スクレイピングやクローリングでも技術的には目的を達成できますが、サイトの規約で禁止されている場合が多いので、この方法で掲載内容を取得します。）処理に必要なツールやライブラリなどのインストールします。
-![](/images/yyyymmdd_backup/action.png =800x)
-#### 3-2-1. Tesseractのインストール
-OCR処理を実行するために必要なソフトウェアエンジン「Tesseract」をLinuxにインストールします。後続の手順でインストールするpythonライブラリ「pytesseract」に必要なものです。
-```bash:Linux上で実行
-sudo apt update
-sudo apt install tesseract-ocr tesseract-ocr-jpn
-```
-#### 3-2-2. ChromeDriverのインストール
-Google Chromeを自動操作するためのWebDriver「ChromeDriver」をインストールします。[こちらのQittaの記事](https://qiita.com/Chronos2500/items/7f56898af25523d04598)の手順に沿ってバージョンに合ったものをダウンロードします。後続の手順でインストールするpythonライブラリ「selenium」に必要なものです。
-
-#### 3-2-3. ライブラリのインストール 
-LangChainを扱うためのライブラリを1.で構築したコンテナにインストールします。
-```bash:Linux上で実行
-# コンテナに入る★★★
-pip install pillow pytesseract selenium langchain langchain-community
-```
-コンテナ上にpyファイルを作成し、ライブラリをインポートします。
-```py:langchainAPI.py
-import os
-import time
-from PIL import Image
-import pytesseract
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OllamaEmbeddings
-from langchain.schema import Document
-from langchain.llms import ChatOllama
-from langchain.agents import Tool, initialize_agent, AgentType
+```txt:一般論のインプット（大人のASD）
+大人のASDの特徴について教えてください。
 ```
 
-
-### 3-3. LangChainのmodels機能を使う
-利用したいチャット用モデルとEmbedding用モデルを指定します。
-```py:langchainAPI.py
-llm = ChatOllama(model = "elyza:jp8b")
-embed = OllamaEmbeddings(model="nomic-embed-text:v1.5")
+```txt:一般論のインプット（大人のADHD）
+大人のADHDの特徴について教えてください。
 ```
-### ここまでの完成図
-![](/images/yyyymmdd_backup/env3.png =800x)
 
-
-### 3-4. LangChainのprompts機能を使う
-利用したいプロンプトを作成します。
-```py:langchainAPI.py
-prompt = f"このURLの内容を確認して、以下の質問に答えてください。URL: {best_url}\n質問: {user_prompt}"
+```txt:ADHDとASDの共通点や違いを認識させる
+大人のASDと大人のADHDの特徴の共通点を教えてください。
+大人のASDと大人のADHDの特徴の違いを教えてください。
 ```
-### ここまでの完成図
-![](/images/yyyymmdd_backup/env4.png =800x)
 
-
-### 3-5. LangChainのretrieval機能・chains機能を使う
-URLリスト（txtの外部文書）を参照して、関連するURLを特定できるようにします。
-```txt:urls.txt
-株探（市況）のニュース：https://kabutan.jp/news/marketnews/?category=1
-株探（材料）のニュース：https://kabutan.jp/news/marketnews/?category=2
-株探（決算）のニュース：https://kabutan.jp/news/marketnews/?category=3
-マネー現代（新着）のニュース：https://gendai.media/list/latest/money
-マネー現代（マーケット）のニュース：https://gendai.media/list/genre/money/market
-マネクリ（新着）のニュース：https://media.monex.co.jp/list/latest
-マネクリ（マーケット）のニュース：https://media.monex.co.jp/ud/feature/code/market
-マネックスの経済指標カレンダー：https://mst.monex.co.jp/pc/servlet/ITS/report/EconomyIndexCalendar
+```txt:オプション
+個々の特徴のにおいて、ASDの傾向が強いか・ADHDの傾向が強いか、
+視覚的に判断できる整理の仕方を提案してください。
 ```
-```py:langchainAPI.py
-# ----  URLリストを読み込んでベクトル化 ----
-def load_url_list(filepath: str) -> list[Document]:
-    with open(filepath, encoding='utf-8') as f:
-        lines = f.readlines()
-    docs = []
-    for line in lines:
-        if '://' in line:
-            title, url = line.strip().split('：')
-            content = f"{title}\n{url}"
-            docs.append(Document(page_content=content, metadata={"source": url}))
-    return docs
 
-# ----  RAGで関連URLを特定 ----
-def find_relevant_url(user_query: str, docs: list[Document], persist_dir: str = "./chroma_store"):
-    embedding = OllamaEmbeddings(model="nomic-embed-text:v1.5")
-
-    # 初期化または既存ロード（初回は新規作成）
-    if not os.path.exists(persist_dir) or not os.listdir(persist_dir):
-        vectorstore = Chroma.from_documents(docs, embedding, persist_directory=persist_dir)
-        vectorstore.persist()
-    else:
-        vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding)
-
-    # 類似度が最も高い1件を選択して、llmに参照させる
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
-    llm = ChatOllama(model="elyza:jp8b")
-    chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, return_source_documents=True)
-
-    result = chain(user_query)
-    best_doc = result['source_documents'][0]
-    return best_doc.metadata["source"]
-
+```txt:個人固有の特徴も分析させる
+チェクリスト型ヒートマップではASD傾向とADHD傾向がおおよそ半分ずつですが、
+脳波の検査の結果を見るとADHD の傾向の方がASDの傾向よりも強いです。
+このことから、どのようなことが言えますか。
 ```
-### ここまでの完成図
-![](/images/yyyymmdd_backup/env6.png =800x)
-
-### 3-6. LangChainのmemory機能を使う
-LLMに会話履歴を持たせます。使用するメソッドとして、ConversationBufferMemoryやConversationSummaryMemoryが挙げられます。前者は、会話文全文を保持するため、文脈を捉えた回答をしてくれる確率は高いですがメモリを要します。後者は会話を要約して保持するため、文脈を捉える精度はやや劣りますがメモリを比較的圧迫せずに処理できます。
-```py:langchainAPI.py
-memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-```
-### ここまでの完成図
-![](/images/yyyymmdd_backup/env7.png =800x)
+→
+**ADHD的な脳の特性を、ASD的な行動スタイルで補っている状態**と理解できます。
+| 観点             | 内容                                      |
+| -------------- | --------------------------------------- |
+| 生理的（脳機能）側面 | ADHDタイプの覚醒リズム（集中のムラ・<br>刺激反応性の高さ）がベースにある    |
+| 心理・行動側面       | 混乱や過刺激を抑えるために秩序・構造を<br>求める傾向が生まれている（ASD的表出） |
+| 結果として           | 「頭の中は忙しいが、外では整理・<br>制御しようとする」二重構造が起きている     |
+| 見え方               | 外見的には几帳面・真面目・慎重に見えるが、<br>内側では衝動や集中ムラとの闘いがある |
 
 
-### 3-8. LangChainのagents機能を使う
-agents機能を使い、LLMがtoolsから次のアクションを選択して実行できるようにします。今回はスクリーンショットを取得するtoolしか作成しませんが、将来的には汎用性のあるものにしたいと思っているので、敢えてagents機能を使用します。
-
-```py:langchainAPI.py
-# ---- スクリーンショット＋OCRを行うTool ----
-def screenshot_ocr_tool(url: str) -> str:
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920x1080')
-
-    driver = webdriver.Chrome(options=options)
-    driver.get(url)
-    time.sleep(3)  # ページの読み込み時間を考慮
-
-    # 全範囲のスクショ取得のために、ページ全体の高さを取得
-    page_height = driver.execute_script("return document.body.scrollHeight")
-    driver.set_window_size(1920, page_height)
-    time.sleep(1)  # サイズ変更後の再描画待ち
-
-    driver.save_screenshot("screenshot.png")
-    driver.quit()
-
-    image = Image.open("screenshot.png")
-    text = pytesseract.image_to_string(image, lang='jpn')
-    return f"[{url} のOCR抽出結果]\n\n{text}"
-
-# ---- LangChain Agentを作成 ----
-def build_agent():
-    # 使用するモデルを指定
-    llm = ChatOllama(model="elyza:jp8b")
-
-    # 使用するツールを作成
-    screenshot_tool = Tool(
-        name="screenshot_reader",
-        func=screenshot_ocr_tool,
-        description="指定されたURLのページを開いて、スクリーンショットから日本語の本文をOCRで抽出して読み取ります"
-    )
-
-    # 会話履歴を保持するメモリを定義
-    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-
-    # agentを構築
-    agent = initialize_agent(
-        tools=[screenshot_tool],
-        llm=llm,
-        agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        tools_return_direct=False,
-        memory=memory,
-        verbose=True
-    )
-
-    return agent
-```
-### ここまでの完成図
-:::details pythonコード全文
-```py:langchainAPI.py
-import os
-import time
-from PIL import Image
-import pytesseract
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OllamaEmbeddings
-from langchain.schema import Document
-from langchain.llms import ChatOllama
-from langchain.agents import Tool, initialize_agent, AgentType
-
-
-# ---- URLリストを読み込んでベクトル化 ----
-def load_url_list(filepath: str) -> list[Document]:
-    with open(filepath, encoding='utf-8') as f:
-        lines = f.readlines()
-    docs = []
-    for line in lines:
-        if '://' in line:
-            title, url = line.strip().split('：')
-            content = f"{title}\n{url}"
-            docs.append(Document(page_content=content, metadata={"source": url}))
-    return docs
-
-
-# ---- RAGで最も関連性の高いURLを取得 ----
-def find_relevant_url(user_query: str, docs: list[Document], persist_dir: str = "./chroma_store"):
-
-	# 使用するモデルを指定
-    embedding = OllamaEmbeddings(model="nomic-embed-text:v1.5")
-
-	# ベクトルストアを構築・起動時に1度初期化
-    if not os.path.exists(persist_dir) or not os.listdir(persist_dir):
-        vectorstore = Chroma.from_documents(docs, embedding, persist_directory=persist_dir)
-        vectorstore.persist()
-    else:
-        vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding)
-
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
-    llm = ChatOllama(model="elyza:jp8b")
-
-    # 1件だけ取得
-    related_docs = retriever.get_relevant_documents(user_query)
-    return related_docs[0].metadata["source"] if related_docs else None
-
-
-# ---- スクリーンショット＋OCRを行うTool ----
-def screenshot_ocr_tool(url: str) -> str:
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920x1080')
-
-    driver = webdriver.Chrome(options=options)
-    driver.get(url)
-    time.sleep(3)  # ページの読み込み時間を考慮
-
-    # ページ全体の高さを取得
-    page_height = driver.execute_script("return document.body.scrollHeight")
-    driver.set_window_size(1920, page_height)
-    time.sleep(1)  # サイズ変更後の再描画待ち
-
-    driver.save_screenshot("screenshot.png")
-    driver.quit()
-
-    image = Image.open("screenshot.png")
-    text = pytesseract.image_to_string(image, lang='jpn')
-    return f"[{url} のOCR抽出結果]\n\n{text}"
-
-
-# ---- LangChain Agentを作成 ----
-def build_agent():
-    llm = ChatOllama(model="elyza:jp8b")
-
-    screenshot_tool = Tool(
-        name="screenshot_reader",
-        func=screenshot_ocr_tool,
-        description="指定されたURLのページを開いて、スクリーンショットから日本語の本文をOCRで抽出して読み取ります"
-    )
-
-    # 会話履歴を保持するメモリを定義
-    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-
-    agent = initialize_agent(
-        tools=[screenshot_tool],
-        llm=llm,
-        agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        tools_return_direct=False,
-        memory=memory,
-        verbose=True
-    )
-
-    return agent
-
-# ---- メイン処理 ----
-def main():
-    # ユーザーの質問を受け取る
-    user_prompt = input("🧑 質問を入力してください：\n> ")
-
-    # URLリストを読み込んでRAGで最も関連するURLを取得
-    docs = load_url_list("./doc/urls.txt")
-    best_url = find_relevant_url(user_prompt, docs)
-
-    if not best_url:
-        print("関連するURLが見つかりませんでした。")
-        return
-
-    print(f"選ばれたURL: {best_url}")
-
-    # Agentを使ってスクリーンショットToolを呼び出す
-    agent = build_agent()
-    final_prompt = f"このURLの内容を確認して、以下の質問に答えてください。\nURL: {best_url}\n質問: {user_prompt}"
-
-    response = agent.run(final_prompt)
-    print(f"\n回答:\n{response}")
-
-
-if __name__ == "__main__":
-    main()
-
-```
-:::
-![](/images/yyyymmdd_backup/env8.png =800x)
-
-
-## 4. Open WebUIとLangChain＋Ollamaを繋ぐAPIを作成する
-LangChainで構築した処理を、Open WebUIなど外部から呼び出せるようにするためには、FastAPIなどを使ってAPI化する必要があります。このセクションでは、LangChainで作成したRAG処理をAPI化するコードを紹介します。Open WebUIのツール連携機能（Function Calling）を使って、このAPIを呼び出すことが可能になります。
-
-:::details 参考：FastAPIの実装の型
-```py:
-# FastAPIのインポート
-from fastapi import FastAPI
-
-# FastAPIアプリのインスタンス（Webサーバーの"本体"）「app」を作成する
-app = FastAPI()
-
-# パスとHTTPメソッドを指定
-# 直下の関数がリクエストの処理を担います。
-@app.get("/")
-def root():
-    return {"mock": "Hello World"}
+```txt:上記をもとに自分の特徴を認識させる
+「マチ」は以下を満たす人物です。理解しましたか。 
+--------- 
+■生まれ年は、1995年。 
+■性別は、女性。 
+■気質・性格の特徴： 
+・基本的な特徴： 　- ADHDの傾向が優位でASDの傾向もある。（いずれの傾向も障害と判定されるほどではない。） 　- 知能が高い。 　- やや完璧主義の傾向がある。 
+・対人関係やコミュニケーション： 　- 言葉が出てこず、パニックになり余計に言葉が出なくなる 　- 自分の考えを上手く言葉にできないため、会話に強い抵抗がある。 　- 周囲を巻き込む力はあまりない。 　- 相手の話を最後まで聞かずに口をはさんでしまう 　- 忘れ物や遅刻はほぼしない 
+・こだわりや興味： 　- 自分の生活に還元できること（株式投資など）については、深く探求する。 　- 興味のある分野には高い集中力を保つことができる。 　- 自分の生活に還元できないことには、興味を持たない。 　- 想定外の事態への対応や、急な予定変更に強いストレスを感じる。 　- 単調な状況が何か月も続くと刺激を求める。 
+・感覚認知の特徴： 　- 光や音に敏感。 　- 全体像よりも細部に敏感。 
+・感情・ストレス反応： 　- 感情表現が控えめ 　- 感情の波はあまりない 　- 失敗や他人からの評価に過敏 　- 嫌なことを避けるためには、普段ストレスを感じるようなことも実行する 　- 締め切りがあるものは、できるだけ早く終わらせようとする 
+・注意や集中力のコントロール： 　- マルチタスクが苦手 　- 集中力の波が大きい 　- 勉強・学習に抵抗がなく、知的好奇心が高い 　- 好きなことに没頭するエネルギーが強い。 　- ケアレスミスは少ない 　- 頭の中が常にフル稼働しており、リラックスできない 
+・その他の特徴 　- 人との関わりが少ない仕事が得意 　- 時間を上手く見積もれず、スケジュール管理が苦手 　- タスク管理が苦手 　- 優先順位付けが苦手 　- 整理整頓は得意 　- ルールが厳しいい職場より、柔軟な環境の方がパフォーマンスが出やすい 　- 発想力・創造性は低い
 ```
 :::
 
 
-Open WebUIはブラウザ上で動作するため、異なるポートのFastAPIへHTTPリクエストを送るにはCORS設定が必要です。たとえば、Open WebUI（ポート3000）とFastAPI（ポート8000）はオリジンが異なると見なされ、CORSを許可しないとブラウザ側でアクセスエラーになります。以下はCORSを許可するpythonコードです。
-```py:langchainAPI.py
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Open WebUI のアドレスのみ許可
-    allow_methods=["GET", "POST"],
-    allow_headers=["*"],
-)
-```
 
-### ここまでの完成図
-:::details pythonコード全文
-```py:langchainAPI.py
-import os
-import time
-from typing import List
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from PIL import Image
-import pytesseract
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+## 2. 強み
+### 2-1. 高い知能と分析力
+**知識や分析を積み上げるタイプの仕事（リサーチ、データ解析、品質管理など）で大きな成果を出しやすい**。
+- 情報を構造的に整理し、正確さを重視して思考できる。
+- 興味のある分野に対しては非常に深く探求し、理解を積み重ねられる。
+- 感情に流されにくく、論理的に判断する力がある。
 
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OllamaEmbeddings
-from langchain.schema import Document
-from langchain.llms import ChatOllama
-from langchain.agents import Tool, initialize_agent, AgentType
-from langchain.memory import ConversationBufferMemory
+### 2-2. 責任感・誠実さ・完遂力
+**細部の正確さが求められる業務（品質保証・会計・文書管理など）や、信頼を積み重ねる仕事で強みが発揮される**。
+- 締め切りや約束を守る意識が強く、早めに行動する。
+- ケアレスミスが少なく、丁寧で精度の高い仕事を好む。
+- 「嫌なことを避けるために努力できる」ため、目標達成意識が安定している。
 
-# ---- FastAPI初期化 ----
-app = FastAPI()
+### 2-3. 集中力と持続力の高さ
+**専門分野の深化型キャリア（研究、専門技術職、分析職など）で成果を出しやすい**。
+- 興味のあるテーマでは強い集中力を長時間維持できる（“過集中”タイプ）。
+- 新しい概念や情報の吸収力が高く、学習を負担に感じない。
+- 長期的な目標を自分なりに設定し、淡々と努力を続けられる。
 
+### 2-4. 感受性の高さと洞察力
+**細やかな観察・改善が求められる職種（教育、心理・医療・サポート職など）に適性**。
+- 光や音などに敏感で、細部や違和感を見抜く感覚が鋭い。
+- 他人の言葉や表情から「本当の意味」を読み取ろうとする努力ができる。
+- 感情表現は控えめだが、観察眼に優れるため、人の機微に気づける。
 
-# ---- CORS設定 ----
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Open WebUI のアドレスのみ許可
-    allow_methods=["GET", "POST"],
-    allow_headers=["*"],
-)
+### 2-5. 自律性と自己管理力
+**フリーランスや在宅勤務など、自分のペースで働ける環境に適している**。
+- 遅刻や忘れ物をしない、整理整頓が得意。
+- 混乱を避けるために、秩序や手順を自ら作る力がある。
+- 厳しすぎる環境よりも、自分でルールを作って進められる環境でパフォーマンスが上がる。
 
-# ---- リクエストボディ定義（promptを受け取ることを明示） ----
-class AskRequest(BaseModel):
-    prompt: str
-
-
-# ---- URLリストを読み込んでベクトル化 ----
-def load_url_list(filepath: str) -> List[Document]:
-    with open(filepath, encoding='utf-8') as f:
-        lines = f.readlines()
-    docs = []
-    for line in lines:
-        if '://' in line:
-            title, url = line.strip().split('：')
-            content = f"{title}\n{url}"
-            docs.append(Document(page_content=content, metadata={"source": url}))
-    return docs
-
-
-# ---- RAGで最も関連性の高いURLを取得 ----
-def find_relevant_url(user_query: str, docs: List[Document], persist_dir: str = "./chroma_store"):
-    embedding = OllamaEmbeddings(model="nomic-embed-text:v1.5")
-
-    if not os.path.exists(persist_dir) or not os.listdir(persist_dir):
-        vectorstore = Chroma.from_documents(docs, embedding, persist_directory=persist_dir)
-        vectorstore.persist()
-    else:
-        vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding)
-
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
-    llm = ChatOllama(model="elyza:jp8b")
-    related_docs = retriever.get_relevant_documents(user_query)
-    return related_docs[0].metadata["source"] if related_docs else None
-
-
-# ---- スクリーンショット＋OCRを行うTool ----
-def screenshot_ocr_tool(url: str) -> str:
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--window-size=1920x1080')
-
-    driver = webdriver.Chrome(options=options)
-    driver.get(url)
-    time.sleep(3)  # ページの読み込み時間を考慮
-
-    # ページ全体の高さを取得
-    page_height = driver.execute_script("return document.body.scrollHeight")
-    driver.set_window_size(1920, page_height)
-    time.sleep(1)  # サイズ変更後の再描画待ち
-
-    driver.save_screenshot("screenshot.png")
-    driver.quit()
-
-    image = Image.open("screenshot.png")
-    text = pytesseract.image_to_string(image, lang='jpn')
-    return f"[{url} のOCR抽出結果]\n\n{text}"
-
-
-# ---- LangChain Agent作成 ----
-def build_agent():
-    llm = ChatOllama(model="elyza:jp8b")
-
-    screenshot_tool = Tool(
-        name="screenshot_reader",
-        func=screenshot_ocr_tool,
-        description="指定されたURLのページを開いて、スクリーンショットから本文をOCRで読み取る"
-    )
-
-    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-
-    agent = initialize_agent(
-        tools=[screenshot_tool],
-        llm=llm,
-        agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        tools_return_direct=False,
-        memory=memory,
-        verbose=True
-    )
-
-    return agent
-
-
-# ---- APIエンドポイント：POST /ask ----
-@app.post("/ask")
-def ask_question(request: AskRequest):
-    user_prompt = request.prompt
-    try:
-        docs = load_url_list("./doc/urls.txt")
-        best_url = find_relevant_url(user_prompt, docs)
-
-        if not best_url:
-            raise HTTPException(status_code=404, detail="関連するURLが見つかりませんでした。")
-
-        agent = build_agent()
-        final_prompt = f"このURLの内容を確認して、以下の質問に答えてください。\nURL: {best_url}\n質問: {user_prompt}"
-        response = agent.run(final_prompt)
-        return {"result": response, "url": best_url}
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# ---- サーバー起動処理 ----
-# このpyファイルを実行すると、127.0.0.1:8000 でFastAPI サーバーが起動
-# uvicorn はFastAPIのサーバー起動に使うライブラリ
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
-
+:::details プロンプト
+```txt:前段でインプットさせた内容をもとに、強みを分析させる
+マチさんの強みを教えてください。
 ```
 :::
-![](/images/yyyymmdd_backup/env9.png =800x)
 
-## 5. Open WebUIとLangChain＋Ollamaを作成したAPIで繋ぐ
-![](/images/yyyymmdd_backup/memo.png =600x)
-### 完成図
-![](/images/yyyymmdd_backup/env0.png =800x)
+## 3. 弱み
+### 3-1. スケジュール管理と優先順位づけの苦手さ
+- 複数のタスクを並行処理すると混乱しやすい。
+- 細部にこだわりすぎて全体の進行が遅れることもある。
+- 「やるべきことが多すぎる」と思考がフリーズしやすい。
 
-## 6. 動作確認する
-![](/images/util/dummy_black.png =150x)
+### 3-2. 想定外の事態への弱さ
+- 急な変更や曖昧な状況に強いストレスを感じる。
+- 完璧主義的に「想定通りに進まない＝失敗」と捉えがち。
 
-## おわりに
-本記事では、Docker環境上でOllamaとOpen WebUIを組み合わせて構築したローカルLLMを、LangChainから活用する方法を解説しました。Open WebUIとAPI経由で接続することで、GUIを維持しながらLangChainの機能を裏側で活用できるようになります。これからローカルLLMとLangChainを組み合わせた応用アプリに挑戦したい方の、第一歩として参考になれば幸いです。
+### 3-3. 対人コミュニケーションの負担感
+- 自分の考えを言語化することに時間がかかり、会話がストレス。
+- パニックになると余計に言葉が出にくい。
+- 感情表現が控えめなため、誤解されることもある。
 
+### 3-4. 感覚過敏と過集中による疲労
+- 光・音・他人の存在などに敏感で、環境からの刺激で消耗しやすい。
+- 集中しすぎて休憩を忘れ、後から一気に疲れる。
 
-## メモ
-このセクションでは、LangChainで作成したRAG処理を /rag?query=... の形式で呼び出せるAPIとして公開するコードを紹介します。
-```py:langchainAPI.py
-from fastapi import FastAPI
+### 3-5. 弱み
+- 失敗や他人の評価に過敏で、「自分はまだ足りない」と思いやすい。
+- 真面目で努力家なぶん、心身が限界に達するまで頑張ってしまう。
 
-# FastAPIアプリのインスタンス（Webサーバーの"本体"）「app」を作成する
-app = FastAPI()
-
-# / というパスに対する GETリクエスト を処理する関数を登録
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-# /items/{item_id} というURLにアクセスしたときの GETリクエストを処理
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": f"APIのid：{item_id}"}
-
-# リクエストが「http://127.0.0.1:8000/items/42?q=FastAPI」の場合、
-# レスポンスは{"item_id": 42, "q": "FastAPI"}
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {
-        "item_id": item_id,
-        "q": q  # ← クエリパラメータの値をそのまま返す
-    }
-
-# このファイルが直接実行されたときに、uvicorn を使ってFastAPIアプリを起動
-# uvicorn はFastAPIのサーバー起動に使うライブラリ
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+:::details プロンプト
+```txt:前段でインプットさせた内容をもとに、弱みを分析させる
+マチさんの弱みを教えてください。
 ```
+:::
+
+## 4. 強みの最大化
+### 4-1.サマリ
+強みの「内向的集中力（深く・継続的に考える力）」と「正確さ」を最大限に活かすには、得意を“自然に出せる環境”を設計し、不得意を“構造で代替”する。① 外的刺激をコントロールし、② タスクを構造化して、③ 深く掘れる時間を確保することが重要。“静かな秩序”と“柔らかい自由”を両立するために、「型を決めて、中身を自由に入れ替える」環境設計が理想。明確なルールやゴールがある環境・自分のペースで進められる作業・一人で深く考える仕事などで、知性と集中力を最大限に発揮できます。
+
+**強みの概要**
+| 領域      | 強みの内容                    |
+| ------- | ------------------------ |
+| 知的特性    | 高い分析力・論理的思考・集中力・学習意欲     |
+| 行動特性    | 締め切り遵守・計画的・誠実・ケアレスミスが少ない |
+| 感覚特性    | 細部への感度が高い（違和感に気づける）      |
+| 感情特性    | 感情の波が小さく、冷静に判断できる        |
+| モチベーション | 「生活に還元できること」への強い探求心      |
+| 働き方傾向   | 一人で深く考える仕事に向く・自律的環境で力を発揮 |
+
+**戦略の原則**
+| 原則           | 内容                          |
+| ------------ | --------------------------- |
+| 構造化原則 | 思考・時間・タスクを“見える形”にして脳を助ける    |
+| 余白原則  | スケジュール・情報・刺激に「余白」を作り、過集中を防ぐ |
+| 回復原則  | 毎日“脳を使わない時間”を固定してリセットする     |
+
+
+### 4-2.戦略１：【環境設計】「静かで整った構造」を味方にする
+刺激に敏感で、注意の波が大きいため、**環境の安定化**で集中を持続させる。「集中するため」ではなく「集中しすぎて疲れないため」に環境を整える。
+| 項目     | 推奨設定                      | 理由                        |
+| ------ | ------------------------- | ------------------------- |
+| 作業環境   | 静かな部屋／ノイズキャンセリング／シンプルな机周り | ADHD的注意散漫を防ぎ、ASD的秩序欲求を満たす |
+| 照明     | 暖色・間接照明・一定の明るさ            | 光刺激を安定化                   |
+| デジタル環境 | 1画面作業＋通知OFF＋固定アプリのみ       | 情報の“マルチチャンネル”化を防ぐ         |
+| 作業時間   | 朝の静かな時間を主軸に設定             | 思考・分析系タスクに最適              |
+
+### 4-3.戦略２：【タスク設計】「構造化」と「見える化」で脳を助ける
+強みの論理的思考力・正確性を引き出しつつ、ADHD的混乱を防ぐ。細かく「決める」より、枠だけ決めて中身を入れ替える運用が合う。
+| 方法             | 内容                         | 効果                  |
+| -------------- | -------------------------- | ------------------- |
+| 3層構造タスク化   | ゴール → 中間成果 → 次の行動          | 思考の迷子を防ぐ            |
+| 視覚タスクボード   | TrelloやNotionで「進行中・完了」を可視化 | 達成感が得やすく継続動機に       |
+| テンプレート活用   | 毎回の手順を固定化（例：資料作成手順書）       | ASD的安定感＋ADHD的スピードUP |
+| 「3タスク/日」制限 | 1日に決めるタスクを3つに限定            | 完璧主義＋多動傾向の過負荷を防止    |
+
+
+### 4-4.戦略３：【時間設計】「集中×回復のリズム」を固定化する★
+過集中による疲労を防ぎ、安定した生産力を保つ。集中ではなく「**再集中できる構造**」を意識し、1日を「3つのモード」で設計するのがポイント。
+| フェーズ       | 内容              | 狙い               |
+| ---------- | --------------- | ---------------- |
+| 朝（9〜12時）   | 創造・分析系（脳が冴えている） | 強みの「論理＋集中力」を最大化  |
+| 昼（13〜15時）  | ルーチン作業・メール処理    | ADHD的集中の低下タイムを補う |
+| 夕方（16〜18時） | 整理・振り返り・明日の準備   | ASD的秩序欲求を満たし安定化  |
+| 夜（21〜22時）  | 「脳のオフライン時間」     | 翌日のパフォーマンス維持     |
+
+
+### 4-5. その他補足・注意点
+#### 強みをさらに発揮する習慣
+| 分野 | 習慣              | 理由                    |
+| -- | --------------- | --------------------- |
+| 思考 | 考えたことを図にする    | 言語化負担を減らし、視覚的に整理できる   |
+| 行動 | 小さく始めて、早く終える  | ADHDの“着手困難”を突破しやすい    |
+| 感情 | できたことリストを夜に見る | 自己評価の偏りをリセット          |
+| 対人 | 話すより書く        | 言葉の詰まり・誤解を防ぎ、思考の精度を保つ |
+| 学習 | 生活に使えることから学ぶ  | モチベーション維持しやすい         |
+| 体調 | 五感のオフ時間を毎晩つくる | 感覚過敏による脳疲労を防ぐ         |
+
+#### 強みを活かせる環境・働き方
+| 環境タイプ                | 向いている理由             |
+| -------------------- | ------------------- |
+| 明確なゴールがある個人タスク型  | 自律的に正確に進められる        |
+| リモート・ハイブリッドワーク   | 感覚刺激の少ない環境を自分で調整できる |
+| 分析・リサーチ・技術・管理系職種 | 集中・正確性・論理力が活かせる     |
+| 柔軟な裁量がある職場       | 自分のペースで成果を出しやすい     |
+
+#### 強みを潰さないための注意点
+| 落とし穴        | どう避けるか                  |
+| ----------- | ----------------------- |
+| 完璧主義で動けなくなる | 「80点で提出」ルールを自分に課す       |
+| 集中しすぎて休めない  | タイマーで強制休憩を入れる           |
+| 環境に引きずられる   | 仕事・生活スペースを明確に分ける        |
+| 他人の評価に過敏    | 評価を“データ”として捉える（感情で受けない） |
+| 興味が移りすぎる    | 「生活に還元できるか？」を判断基準にする    |
+
+:::details プロンプト
+```txt:前段でインプットさせた内容をもとに、強みの最大化案を分析させる
+マリさんの強みを最大化するためには、どうしたらよいですか。
+```
+:::
+
+
+## 5. 弱みのカバー
+### 5-1.サマリ
+ADHD優位＋ASD傾向をあわせ持ち、知的水準が高いタイプ の方は、努力である程度カバーできる分、気づかぬうちに心身の負荷をため込みやすい傾向がある。そこで、「混乱を防ぐための秩序」と「完璧主義を緩める余白」、つまり、構造化＋緩和のバランスを両立させて、弱みを「行動・感情・環境」の3側面から補う日常習慣を具体的に整理する。朝は「構造づくり（計画・整理）」昼は「集中ゾーン（作業）」夜は「緩めゾーン（感情整理・静かな時間）」のように、「構造を作る時間」と「力を抜く時間」を、意図的に分けることが、高知的・繊細タイプ の人の安定に最も効果的。
+
+また、目的が「負荷の低減」であることを踏まえた上で、負荷の低減に最も良い影響が出得るものから習慣化する。★
+
+### 5-2.習慣化１：【行動面】スケジュール・タスク管理を視覚化する
+#### タスクは3段階で整理する
+「今すぐ／今週中／後で」だけに分類する。（細かくしすぎると処理が止まる）ADHD傾向による“タスクの迷子”を防ぎ、ASD傾向の“構造欲求”も満たす。
+#### 「時間ブロック法」で見積もり誤差を補正
+1日の予定を「ブロック単位（午前・午後・夜）」で区切り、各ブロックに「やること1つ＋余白30分」を設定。「時間を詰めすぎる」完璧主義を防ぎ、見積もりの甘さを吸収する。
+#### マルチタスク禁止ルール
+一度に1つだけ、終わるまで切り替えない。タブやアプリは最小限に開く・「今やっていること」をメモに書いておく（再集中しやすくなる）などして、ADHDの注意の拡散を抑え、ASD的な“順序性”を活かす。
+### 5-3.習慣化２：【感情・思考面】ストレスと自己評価のコントロール
+#### 1日の振り返りメモを3行で
+夜寝る前に以下3つを書く。ASD的な「反省過多」をポジティブ変換する。ADHD的な「勢いで終わる一日」を整理して区切りをつける。
+- 今日うまくできたこと
+- 感情が動いた瞬間
+- 明日やめたいこと・続けたいこと
+#### 「8割でOK」ルール
+完璧主義でエネルギーを使いすぎないために、タスクごとに「理想の8割」を上限と決める。ADHDの過集中とASDの完璧主義の両方を防ぐ。
+#### 嫌な感情の原因にタグ付けする
+不快や不安を感じたときに、紙に1行でメモし、タグをつける。感情を「可視化」することで、過剰な自己否定を防ぎ、再発防止策を立てやすくする。（例：「急な予定変更があった」→ #予測不能、「人に否定された」→ #評価過敏）
+
+### 5-4.習慣化３：【環境面】刺激をコントロールし、安心できる環境を作る★
+#### 五感を落ち着かせるルーティン
+感覚過敏（ASD）＋覚醒変動（ADHD）を安定させる。日中の「集中」と夜の「鎮静」を切り替える。
+
+朝：静かな音楽＋自然光＋温かい飲み物
+昼：耳栓やノイズキャンセリングで集中時間を確保
+夜：照明を暖色に変え、スマホ通知を切る
+
+#### 定位置ルールで整理整頓を習慣化
+整理の得意さを維持しつつ、ADHD的な注意の漏れを予防する。
+よく使う物の位置を固定（鍵・財布・書類）
+「使ったら戻す」を徹底
+机の上は“毎晩リセット”
+
+#### 人との距離感を自分で選ぶ
+コミュニケーション疲労を減らし、思考の余白を守る。
+
+集団より1対1、リアルよりチャットやメール中心を選ぶ
+定期的に「会話しない日」を設けて回復時間を確保
+
+### 5-5.習慣化４：【生活習慣】脳のコンディションを整える
+| 項目   | 習慣例              | 狙い            |
+| ---- | ---------------- | ------------- |
+| 睡眠   | 毎日同じ時間に寝起きする     | ADHDの覚醒リズム安定  |
+| 食事   | 糖質・カフェインの摂りすぎに注意 | 集中ムラの抑制       |
+| 運動   | 毎日15〜20分の軽い有酸素運動 | 注意力・ストレス耐性の向上 |
+| デジタル | SNSや通知の使用時間を制限   | 過刺激の抑制        |
+| 趣味   | 「目的のない没頭」を週1回    | 完璧主義の緩和       |
+
+### 5-6.習慣化５：【その他】習慣化のコツ
+| 弱み          | 習慣での補い方          | 補う方向性             |
+| ----------- | ---------------- | ----------------- |
+| スケジュール管理が苦手 | 朝の3タスクルール        | 選択肢を減らす         |
+| 想定外に弱い           | 代替案A/Bを常に持つ      | 柔軟性をシミュレーションで確保 |
+| 会話が苦手             | 文章・チャットでの発信に切り替え | 自分のペースで言語化      |
+| 感覚過敏               | 五感リセットルーティン           | 刺激の量をコントロール     |
+| 自己評価が厳しい       | 3行日記・8割ルール       | 完璧主義を構造的に緩める    |
+
+
+:::details プロンプト
+```txt:前段でインプットさせた内容をもとに、弱みのカバー案を分析させる
+マチさんの弱みを補う日常習慣を具体的に整理してください。
+上記の習慣化タスクに優先順位をつけたいです。どのような基準で優先順位を付けたらよいですか。
+マチさんが、タスクを細分化してスケジュールを立てたり、遅延した時にリスケジュールしたりできるようになるためには、どうしたらよいですか。
+マチさんが疲れやすい状況とその予防策を教えて下さい。
+「就寝一時間前は脳をオフライン化」の時間帯は、マチさんは何をして過ごすのが良いですか。
+マリさんはタスクの細分化が苦手です。原因と対策を考えてください。
+```
+:::
