@@ -16,14 +16,14 @@ published: true
 ## 個別トピックで見るトレンド
 ### 1.「生成」分野：表現は「作る」から「演出する」段階へ
 ![](/images/20251025_idea_gathering_info_fords/create.png =650x)
-Sora、Midjourney、Stable Diffusion などの映像・アート向けモデルは引き続き注目の中心にあります。近年の大きな変化は、生成AIが「作品を自動でつくる道具」ではなく、「**質感・構図・動きといった演出そのものをコントロールできる表現手段**」へと進化している点です。これまで専門性が必要だった映像表現が、誰でも扱える領域へと開かれつつあり、表現者の裾野が広がることで、創作の多様性もさらに豊かになろうとしています。
+Sora、Midjourney、Stable Diffusion といった映像・アート向けモデルは、依然として大きな注目を集めています。生成AIは「自動で作品を作る道具」から、「**質感や構図、動きまで演出を制御できる表現手段**」へ進化し、専門性が必要だった映像表現により多くの人が触れられる環境になりつつあります。
 
-一方で、AIを「どう使うか」以上に、「どこに組み込み、どのように共存させるか」が重要な論点になってきました。東京都が全庁横断でAI活用を進める方針を示したことは、AIが特定部署の専用技術ではなく、業務プロセスそのものに溶け込む前提へと変わりつつあることを象徴しています。さらに、OpenAI の ChatGPT Atlas は、AIをブラウザに直接統合し、ウェブ閲覧中にそのまま要約・相談・整理ができる環境を実現しました。これからは、AIを使える力よりも、**どの場面でどのように共に考える相手として働かせるか設計する力**が問われていきそうです。
+一方で、AIを「どう使うか」以上に、「どこに組み込み、どのように共存させるか」が重要な論点になってきました。デジタル庁が行政向け生成AI環境「源内」に OpenAI モデルを導入した取り組みは、人とAIの役割分担を業務レベルで再設計する動きの象徴です。さらに、OpenAI の ChatGPT Atlas は、AIをブラウザに直接統合し、ウェブ閲覧中にそのまま要約・相談・整理ができる環境を実現しました。これからは、AIを使える力よりも、**どの場面でどのように共に考える相手として働かせるか設計する力**が問われていきそうです。
 :::details 参考文献
-https://blog.g-gen.co.jp/entry/creating-videos-with-google-vids
 http://ai-biblio.com/books/archives/96
+https://ledge.ai/articles/google_veo3_1_flow_integration
 https://news.yahoo.co.jp/articles/21b089440692f8efc40ae9345aa94cf3d8c1ce40
-https://ledge-ai.the-ai.jp/articles/tokyo_ai_strategy_2025
+https://ledge-ai.the-ai.jp/articles/digital_agency_openai_genai_collaboration
 https://www.bloomberg.co.jp/news/articles/2025-10-21/T4H88FGOYMTC00
 :::
 
@@ -58,13 +58,14 @@ https://ledge-ai.the-ai.jp/articles/government_digital_industry_global_strategy_
 ![](/images/20251025_idea_gathering_info_fords/efficiency.png =650x)
 キーワードマップでは「正確・精度」が中心付近にあり、作業を早く終わらせることよりも、**成果を揺らぎなく再現できる状態を作ることが重視されている**ことを示唆しています。実際、ニュースサイト・調査・知識収集では、Perplexity の Deep Research のように、AIが複数検索と比較検証を自動で繰り返し、レポートを生成する機能が注目されています。これは速度の追求ではなく、**結論に至る思考過程そのものを安定させるための効率化**です。
 
-また、AIの内部処理設計にも工夫が進んでいます。たとえばAlibaba の Tongyi DeepResearch では、巨大モデルを常時フル稼働させるのではなく、必要な約3割だけを今使う領域として起動する設計で計算負荷を抑えています。また、OmniWorld のような 4D データセットは、映像生成に必要な現実の動きや関係性を統合的に整理することで、学習効率の向上を目指しています。
+また、AIの内部処理設計にも工夫が進んでいます。たとえばAlibaba の Tongyi DeepResearch では、巨大モデルを常時フル稼働させるのではなく、必要な分だけを今使う領域として起動する設計で計算負荷を抑えています。また、OmniWorld のような 4D データセットは、映像生成に必要な現実の動きや関係性を統合的に整理することで、学習効率の向上を目指しています。
 
 さらに、「最適」「目的」などの単語が示すように、大規模モデル一択ではなく、用途に合ったモデルとワークフローを選ぶ文化へと移行しています。**目的に即したモデル・ツール選定**と**それに合った実行プロセス（ワークフロー）の設計**できる力が求められています。
 :::details 参考文献
-https://www.techno-edge.net/article/2025/09/27/4620.html#heading-2
+https://oneword.co.jp/bignite/ai_news/alibaba-tongyi-deepresearch-30b-open-source-llm/
+https://ledge.ai/articles/ntt_tsuzumi2_fullscratch_gpt5_level_japanese_llm
+https://arxiv.org/html/2509.12201v1
 https://pythonandai.com/perplexity-deep-research/
-https://pythonandai.com/genspark-credit-fee/
 https://pythonandai.com/genspark-smart-phone/
 http://ai-biblio.com/books/archives/40
 https://pythonandai.com/claude-code-vscode-mcp-bedrock/
