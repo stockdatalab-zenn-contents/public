@@ -127,8 +127,92 @@ SBI_PASS=ABCDE! # 自分のログインパスワード
 ```
 デバイス認証の流れは下図の通りです。2-1の処理完了後から2-3の処理開始までは、**2-2でメールのリンク先のページにデバイス認証のためのコードを入力するため、長めに45秒程待機するようにします**。2-2で入力するコードは、2-1の処理完了時に取得したスクショを参照します。なお、その他ページ遷移のたび短時間待機しているのは、サイトのサーバーに過度に負荷をかけないようにするためです。
 ![](/images/20250819_tech_sbilogin/login.png =800x)
-:::details master.ipynb
-```sh:master.ipynb
+:::message
+2025/10/25にログイン処理の仕様が変更されました。それに伴い、URLやhtmlの要素名の変更・AUの指定などが必要となりました。
+:::
+:::details master.ipynb（2025/10/25以降）
+```py:master.ipynb
+import os, getpass, time
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+options = Options()
+
+# コンテナ内の Chromium 実行ファイルを指定
+chrome_bin = os.environ.get("CHROME_BIN", "/usr/bin/chromium")
+options.binary_location = chrome_bin
+
+# ヘッドレス + ルート起動向けの安定化フラグ
+options.add_argument("--headless=new")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--disable-gpu")
+options.add_argument("--window-size=1920,1080")
+
+#SBI側の仕様変更により、2025/10/25以降指定必須（使用する環境に合わせて指定）
+options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/139.0.0.0 Safari/537.36")  
+
+
+# デバイス認証済みのプロファイルが保存される場所を読み込ませる
+se_profile = os.getenv("SE_PROFILE")
+options.add_argument(f'--user-data-dir={se_profile}')
+
+
+# ドライバは webdriver_manager に任せる（ブラウザ本体は上で用意済み）
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+
+# UAを確認
+ua = driver.execute_script("return navigator.userAgent;")
+print("Current User-Agent:", ua)
+
+
+# SBI証券のページへ遷移
+url = "https://login.sbisec.co.jp/login/entry"
+driver.get(url)
+time.sleep(3) # 画面が描画されるまで待機
+
+# ユーザーネームを入力
+username_value = os.getenv("SBI_USER")
+username = driver.find_element(By.NAME, "username")
+username.send_keys(username_value)
+
+# パスワードを入力
+password_value = os.getenv("SBI_PASS")
+password = driver.find_element(By.NAME, "password")
+password.send_keys(password_value)
+
+# ログインボタンをクリック
+driver.find_element(By.ID, "pw-btn").click()
+time.sleep(5) # 画面が描画されるまで待機
+
+# ------------------初回ログイン時のみ実行（ここから）---------------------------------
+# デバイス認証（メール送信）
+driver.find_element(By.ID, "sendEmailButton").click()
+time.sleep(2) # 画面が描画されるまで待機
+driver.save_screenshot('./selenium_screenshot_code.png') # デバイス認証のための入力コードが記載されている画面
+
+# デバイス認証（チェックボタン押下・ボタン押下）
+driver.find_element(By.ID, "authCheck").click() # 認証完了確認のチェック
+time.sleep(45) # 画面が描画される （ボタンが活性化して押下できるようになる）・メールから認証完了するまで待機
+driver.find_element(By.ID, "otpRegisterButton").click() # 認証完了確認のボタン押下
+time.sleep(15) # 自動で画面遷移するのを待つ
+# ------------------初回ログイン時のみ実行（ここまで）---------------------------------
+
+# ログアウトボタンをクリック
+driver.find_element(By.LINK_TEXT, "ログアウト").click()
+time.sleep(5)
+
+driver.quit()
+```
+:::
+:::details master.ipynb（2025/10/25以前）
+```py:master.ipynb
 import os, getpass, time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -201,6 +285,11 @@ driver.quit()
 :::
 
 ## 3. ログイン・ログアウトする（２回目以降）
+:::message alert
+以下は2025/10/25以前の古い情報です。
+「 2. デバイス認証する（初回のみ）」の手順でデバイス認証の通過はできるのですが、2025/10/27現在では、デバイスの登録・削除ができない(機能していない)ように見受けられます。...自分の環境だけだったらすみません。
+:::
+
 ２回目以降は、デバイス認証することなくログインすることができます。
 :::details master.ipynb（前述のmain.pyから不要な部分をコメントアウト）
 ```sh:master.ipynb
@@ -275,6 +364,11 @@ driver.quit()
 ```
 :::
 
+
+
+## 4: おまけ：SBI証券のBRISKの全板ページの見方メモ
+詳細は、[こちらの公式ページ](https://static.brisk.jp/assist-v2/fullitapanelhelp.html)を参照してください。
+![](/images/20250819_tech_sbilogin/board.png =700x)
 
 
 ## おわりに
