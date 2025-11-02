@@ -152,7 +152,7 @@ options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--disable-gpu")
 options.add_argument("--window-size=1920,1080")
 
-#SBI側の仕様変更により、2025/10/25以降指定必須（使用する環境に合わせて指定）
+#SBI側の仕様変更により、2025/10/25以降指定必須（ブラウザのバージョンは最新のものを指定）
 options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) "
                         "AppleWebKit/537.36 (KHTML, like Gecko) "
                         "Chrome/142.0.0.0 Safari/537.36")  
