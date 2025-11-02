@@ -155,7 +155,7 @@ options.add_argument("--window-size=1920,1080")
 #SBI側の仕様変更により、2025/10/25以降指定必須（使用する環境に合わせて指定）
 options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) "
                         "AppleWebKit/537.36 (KHTML, like Gecko) "
-                        "Chrome/139.0.0.0 Safari/537.36")  
+                        "Chrome/142.0.0.0 Safari/537.36")  
 
 
 # デバイス認証済みのプロファイルが保存される場所を読み込ませる
@@ -285,11 +285,6 @@ driver.quit()
 :::
 
 ## 3. ログイン・ログアウトする（２回目以降）
-:::message alert
-以下は2025/10/25以前の古い情報です。
-「 2. デバイス認証する（初回のみ）」の手順でデバイス認証の通過はできるのですが、2025/10/27現在では、デバイスの登録・削除ができない（10/25前後の情報が上書きされない？）ように見受けられます...自分の環境だけだったらすみません。
-:::
-
 ２回目以降は、デバイス認証することなくログインすることができます。
 :::details master.ipynb（前述のmain.pyから不要な部分をコメントアウト）
 ```sh:master.ipynb
@@ -310,8 +305,13 @@ options.binary_location = chrome_bin
 options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--disable-gpu") 
+options.add_argument("--disable-gpu")
 options.add_argument("--window-size=1920,1080")
+
+#SBI側の仕様変更により、2025/10/25以降指定必須（使用する環境に合わせて指定）
+options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/142.0.0.0 Safari/537.36")  
 
 
 # デバイス認証済みのプロファイルが保存される場所を読み込ませる
@@ -323,36 +323,40 @@ options.add_argument(f'--user-data-dir={se_profile}')
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=options)
 
+# UAを確認
+ua = driver.execute_script("return navigator.userAgent;")
+print("Current User-Agent:", ua)
+
 
 # SBI証券のページへ遷移
-url = "https://www.sbisec.co.jp/ETGate"
+url = "https://login.sbisec.co.jp/login/entry"
 driver.get(url)
 time.sleep(3) # 画面が描画されるまで待機
 
 # ユーザーネームを入力
 username_value = os.getenv("SBI_USER")
-username = driver.find_element(By.NAME, "user_id")
+username = driver.find_element(By.NAME, "username")
 username.send_keys(username_value)
 
 # パスワードを入力
 password_value = os.getenv("SBI_PASS")
-password = driver.find_element(By.NAME, "user_password")
+password = driver.find_element(By.NAME, "password")
 password.send_keys(password_value)
 
 # ログインボタンをクリック
-driver.find_element(By.NAME, "ACT_login").click()
+driver.find_element(By.ID, "pw-btn").click()
 time.sleep(5) # 画面が描画されるまで待機
 
-# ------------------初回ログイン時のみ実行（ここから）---------------------------------
+# # ------------------初回ログイン時のみ実行（ここから）---------------------------------
 # # デバイス認証（メール送信）
-# driver.find_element(By.CLASS_NAME, "seeds-button-lg").click()
+# driver.find_element(By.ID, "sendEmailButton").click()
 # time.sleep(2) # 画面が描画されるまで待機
 # driver.save_screenshot('./selenium_screenshot_code.png') # デバイス認証のための入力コードが記載されている画面
 
 # # デバイス認証（チェックボタン押下・ボタン押下）
-# driver.find_element(By.ID, "check-panel").click() # 認証完了確認のチェック
+# driver.find_element(By.ID, "authCheck").click() # 認証完了確認のチェック
 # time.sleep(45) # 画面が描画される （ボタンが活性化して押下できるようになる）・メールから認証完了するまで待機
-# driver.find_element(By.ID, "device-auth-otp").click() # 認証完了確認のボタン押下
+# driver.find_element(By.ID, "otpRegisterButton").click() # 認証完了確認のボタン押下
 # time.sleep(15) # 自動で画面遷移するのを待つ
 # # ------------------初回ログイン時のみ実行（ここまで）---------------------------------
 
