@@ -1,5 +1,5 @@
 ---
-title: "NIMについて調べてみた"
+title: "NVIDIA NIMとは？特徴・メリット・Ollamaとの違いを解説"
 emoji: "👻"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["NIM", "Ollama", "NVIDIA", "比較", "まとめ"]
