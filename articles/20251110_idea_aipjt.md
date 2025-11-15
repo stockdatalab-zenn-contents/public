@@ -39,7 +39,7 @@ published: true
 
 - **選定時の観点**
   - **比較指標**  
-  LLMは [**Artificial Analysis Intelligence Index**](https://artificialanalysis.ai/leaderboards/models) が参考になります。embeddingモデルに関しては、RAGで使用する場合は「検索用途に強い埋め込み（semantic retrieval向け）」か「分類・クラスタリングに強い埋め込み」かで選ぶべきモデルが異なります。また、**パラメーター数の大きさ**も参考にすると良いでしょう。
+  LLMは **MMLU-Pro**や[**Artificial Analysis Intelligence Index**](https://artificialanalysis.ai/leaderboards/models) が参考になります。embeddingモデルに関しては、RAGで使用する場合は「検索用途に強い埋め込み（semantic retrieval向け）」か「分類・クラスタリングに強い埋め込み」かで選ぶべきモデルが異なります。また、**パラメーター数の大きさ**も参考にすると良いでしょう。
   - **学習言語と利用言語が一致しているか** 
   例えば、日本語文書検索を目的とする場合は 日本語に最適化されたEmbeddingモデル（nomic-embed-textなど）やLLM（ELYZAなど）が精度・品質を左右します。
   - **運用条件**
