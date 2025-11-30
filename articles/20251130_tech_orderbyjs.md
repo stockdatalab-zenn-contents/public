@@ -2,7 +2,7 @@
 title: "SBI証券（Web版）で注文を高速化する：IFDOCO自動入力ブックマークレット公開"
 emoji: "🐥"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["SBI証券", "ブックマークレット", "java script"]
+topics: ["SBI証券", "ブックマークレット", "javascript"]
 published: true
 ---
 ## はじめに
@@ -47,7 +47,7 @@ published: true
 ![](/images/20251130_tech_orderbyjs/bookmark1.png =500x)
 2. 「ブックマークをインポート」からbookmarks.htmlを選択し、インポートします。
 ![](/images/20251130_tech_orderbyjs/bookmark2.png =500x)
-3. 必要に応じて、ブックマークが保存される場所を変更します。
+3. 必要に応じて、ブックマークが保存される場所を変更します。ブックマークバーに保存するのがおすすめです。
 ![](/images/20251130_tech_orderbyjs/bookmark3.png =500x)
 :::
 ### 1-2.IFDOCO画面で 株数・指値・利確ライン・預かり区分 を入力
