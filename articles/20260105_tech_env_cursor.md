@@ -2,7 +2,7 @@
 title: "【図解】Windows11でWSL2＋Docker+CursorによるPython開発環境を構築する手順"
 emoji: "😊"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Cursor", "Docker", "バイブコーディング", "Vibe Coding"]
+topics: ["Cursor", "Docker", "バイブコーディング"]
 published: true
 ---
 ## はじめに
@@ -112,7 +112,7 @@ cursorでは、用途にあったモードやモデルを指定することが�
 右側のチャット欄から、設計・実装・改善をまとめて依頼できます。また、ターミナルで出たエラーはクリックして表示される 「Add to Chat」で引用できるため、解析が楽にできます。
 ![](/images/20260105_tech_env_cursor/setting4-3.png =600x)
 
-### 4-4. 過去のチャット履歴を参照する
+### 4-5. 過去のチャット履歴を参照する
 チャット欄右上の時計マークから、過去の会話ログを確認できます。
 ![](/images/20260105_tech_env_cursor/setting4-4.png =600x)
 
