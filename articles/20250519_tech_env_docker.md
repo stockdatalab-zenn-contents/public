@@ -197,7 +197,7 @@ mlflow
 ```
 移動したら、以下のコマンドを実行します。
 ```sh:Ubuntu-24.04アプリ（Bash）
-docker build -t zenn0 .
+docker build --no-cache -t zenn0 .
 docker images
 ```
 ### 4-2. コンテナを作成する

@@ -1,7 +1,7 @@
 ---
 title: "「IT業界のデリバリーにおける生成AI活用」と「ガバナンス」について考えてみる"
 emoji: "😎"
-type: "tech" # tech: 技術記事 / idea: アイデア
+type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ["AI", "LLM", "ガバナンス"]
 published: true
 ---
