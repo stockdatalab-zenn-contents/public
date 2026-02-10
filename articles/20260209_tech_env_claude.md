@@ -35,8 +35,9 @@ published: true
 ![](/images/20260209_tech_env_claude/create_acc_6.png =600x)
 :::
 
-## 3. コンテナにClaude Codeを入れる（devcontainer.json 作成）
-`.devcontainer/devcontainer.json` は、ざっくり言うと 「**開発環境のレシピ（設定メモ）**」です。これを用意しておくと、コンテナを開き直したタイミングで以下を **自動で導入**でき、毎回手で入れ直す手間が減ります。
+## 3. コンテナにClaude Codeを入れる
+### 3-1. VSCodeの拡張機能「Claude Code for VSCode」がコンテナに自動セットアップされるようにする
+devcontainer.jsonを作成します。`.devcontainer/devcontainer.json` は、ざっくり言うと 「**開発環境のレシピ（設定メモ）**」です。これを用意しておくと、コンテナを開き直したタイミングで以下を **自動で導入**でき、毎回手で入れ直す手間が減ります。
 
 - 必要な機能（例：Node.js、Claude Code CLI）
 - VS Code拡張（Claude Code）
@@ -137,6 +138,27 @@ Reopen後のコンテナ上で、Claude Code 拡張と Claude アカウントを
 ![](/images/20260209_tech_env_claude/extention_5.png =800x)
 ![](/images/20260209_tech_env_claude/extention_6.png =800x)
 ![](/images/20260209_tech_env_claude/extention_7.png =800x)
+
+
+### 3-2. ターミナルでもClaudeCodeを使えるようにする
+Claude Codeは、基本的にコマンドライン（CLI）で動くツールです。そのため、コンテナ上で開いているVS Codeのターミナルからも実行できるように設定します。まずは、公式ドキュメントの参照先を用意します。ブラウザで「claude code ドキュメント」などで検索し、セットアップ時に参照すべきページ（例：概要ページ）を見つけます。
+![](/images/20260209_tech_env_claude/claude_terminal_1.png =600x)
+
+次に、そのURLを添えて、先ほど導入した**Claude Code拡張機能のチャット欄に指示を出します**。拡張機能がドキュメントの内容に沿って、コンテナ内で使うための**セットアップ手順を実行してくれます**。セットアップが完了すると、基本的な使い方も簡単に説明されます。
+```txt:拡張機能のClaudeCodeのチャット欄に入力
+「https://code.claude.com/docs/ja/overview」
+これをこのコンテナ上で使えるようにしてください。
+```
+![](/images/20260209_tech_env_claude/claude_terminal_2.png =600x)
+![](/images/20260209_tech_env_claude/claude_terminal_3.png =600x)
+
+最後に、Claude Codeを自分のアカウントと紐づけます。拡張機能の案内に従って、ターミナルで「claude」を実行し、表示される手順に沿って認証（ログイン）を完了させます。これで、ターミナルからClaude Codeを使える状態になります。
+:::details アカウント紐づけ時のイメージ
+![](/images/20260209_tech_env_claude/claude_terminal_4.png =600x)
+![](/images/20260209_tech_env_claude/claude_terminal_5.png =600x)
+![](/images/20260209_tech_env_claude/claude_terminal_6.png =600x)
+![](/images/20260209_tech_env_claude/claude_terminal_7.png =600x)
+:::
 
 ### 完成図
 ![](/images/20260209_tech_env_claude/env.png =400x)
