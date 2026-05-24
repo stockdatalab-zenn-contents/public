@@ -345,6 +345,8 @@ services:
         volumes:
             - .:${APP_MOUNT_PATH:-/root/app}
         working_dir: ${APP_MOUNT_PATH:-/root/app}
+        ports:
+            - "127.0.0.1:8888:8888"
         command: >
             jupyter lab
             --ip=0.0.0.0
