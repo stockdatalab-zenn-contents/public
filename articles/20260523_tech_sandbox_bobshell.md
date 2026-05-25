@@ -142,7 +142,7 @@ yyyymmdd_pjt_name/
 ![](/images/20260523_tech_sandbox_bobshell/env_03.png =600x)
 
 
-## 4. Dockerコンテナ構築のための資材準備する
+## 4. アプリのコンテナ構築のための資材準備する
 Bobとは関係なく、以下の資材からアプリが動作する環境であるコンテナを構築・起動・停止できるか確認します。（参考：記事「[【図解】Windows11でWSL2＋DockerによるPython開発環境を構築する手順](https://zenn.dev/stockdatalab/articles/20250519_tech_env_docker)」の「4. python環境用のコンテナを構築する」の章）
 - tar.gzなどの既存のDockerイメージをロードして使用する場合
   - dockerImageName.tar.gz
